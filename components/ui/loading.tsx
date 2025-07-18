@@ -45,6 +45,7 @@ export default function SkeletonLoadingScreen() {
     return () => {
       timers.forEach((timer) => clearTimeout(timer))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

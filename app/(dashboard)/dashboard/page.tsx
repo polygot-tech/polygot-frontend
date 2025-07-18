@@ -498,7 +498,7 @@ export default function ApplicationsDashboard() {
                         </div>
                       </CardHeader>
                       <CardContent className="p-6 pt-2">
-                        <Link href={`/application/${app.id}`}>
+                        <Link href={`/dashboard/${app.id}`}>
                           <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold py-3 h-12 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border-0 group">
                             <Settings className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform duration-300" />
                             Configure Application

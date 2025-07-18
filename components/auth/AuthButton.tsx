@@ -22,7 +22,7 @@ export function AuthButton() {
 
   if (user) {
     return (
-      <Link href="/application"
+      <Link href="/dashboard"
         className="flex items-center gap-3 rounded-full p-1 pr-4 transition-colors hover:bg-gray-100"
         title={`Go to dashboard - ${user.name}`}
       >

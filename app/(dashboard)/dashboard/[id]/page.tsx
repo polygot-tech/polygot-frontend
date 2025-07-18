@@ -139,7 +139,7 @@ export default function AppConfigPage() {
       // Hide success message and navigate back after 2 seconds
       setTimeout(() => {
         setShowSuccess(false)
-        router.push("/application")
+        router.push("/dashboard")
       }, 2000)
     } catch (error) {
       console.error("Failed to save changes:", error)
@@ -152,7 +152,7 @@ export default function AppConfigPage() {
     try {
       await deleteApp({ app_id: appSettings.id })
       setShowDeleteDialog(false)
-      router.push("/application")
+      router.push("/dashboard")
     } catch (error) {
       console.error("Failed to delete app:", error)
     }
@@ -227,7 +227,7 @@ export default function AppConfigPage() {
             <p className="text-gray-600 mb-6">
               The application you&apos;re looking for doesn&apos;t exist or you don&apos;t have access to it.
             </p>
-            <Link href="/application">
+            <Link href="/dashboard">
               <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Applications
@@ -299,7 +299,7 @@ export default function AppConfigPage() {
             className="flex items-center justify-between"
           >
             <div className="flex items-center space-x-4">
-              <Link href="/application">
+              <Link href="/dashboard">
                 <Button
                   variant="outline"
                   size="icon"
