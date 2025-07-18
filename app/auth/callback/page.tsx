@@ -19,7 +19,7 @@ function AuthCallbackContent() {
     if (tokenFromParams) {
       setToken(tokenFromParams);
       checkAuthStatus().then(() => {
-        router.push('/dashboard');
+        router.push('/application');
       });
     } else {
       console.error("No token found in URL, redirecting home.");

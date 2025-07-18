@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
+import { BASE_API_URL } from "@/lib/api";
 
 interface User {
   id: number
@@ -40,6 +41,7 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuthStatus: async () => {
+        await useAuthStore.persist.rehydrate();
         const currentToken = get().token; // Get token from the store (which is hydrated from localStorage)
 
         if (!currentToken) {
@@ -50,7 +52,7 @@ export const useAuthStore = create<AuthState>()(
 
         try {
           set({ isLoading: true });
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/me`, {
+          const response = await fetch(`${BASE_API_URL}/api/v1/user/me`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -80,7 +82,8 @@ export const useAuthStore = create<AuthState>()(
       login: async (email: string, password: string) => {
         try {
           set({ isLoading: true });
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
+          console.log(process.env.NEXT_PUBLIC_API_URL)
+          const response = await fetch(`${BASE_API_URL}/api/v1/auth/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -120,4 +123,3 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
-

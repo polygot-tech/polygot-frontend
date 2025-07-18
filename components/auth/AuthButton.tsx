@@ -1,21 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
 import { useAuthStore } from "@/store/auth.store"; // Use the hydration-safe hook
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogIn } from "lucide-react";
 import Link from "next/link";
+import { BASE_API_URL } from "@/lib/api";
 
 export function AuthButton() {
   // Use the hydration-safe hook to prevent SSR issues
-  const { user, isLoading, checkAuthStatus } = useAuthStore();
+  const { user, isLoading } = useAuthStore();
 
-  useEffect(() => {
-    // This check can be useful but might be better placed in a layout
-    // to avoid running on every component instance.
-    checkAuthStatus();
-  }, [checkAuthStatus]);
+  
 
   if (isLoading) {
     return (
@@ -27,7 +22,7 @@ export function AuthButton() {
 
   if (user) {
     return (
-      <Link href="/dashboard"
+      <Link href="/application"
         className="flex items-center gap-3 rounded-full p-1 pr-4 transition-colors hover:bg-gray-100"
         title={`Go to dashboard - ${user.name}`}
       >
@@ -45,10 +40,12 @@ export function AuthButton() {
   return (
     // Use a standard <a> tag for external navigation.
     // The Button's `asChild` prop makes the link look like a button.
-    <Button asChild className="gap-2 bg-green-700 hover:bg-green-800">
-      <a href={`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/google`}>
-        <LogIn className="h-4 w-4" />
-        Get API Key
+     <Button
+      variant="outline"
+      className="border-emerald-200 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 bg-transparent"
+    >
+      <a href={`${BASE_API_URL}/api/v1/auth/google`}>
+        Sign in
       </a>
     </Button>
   );
