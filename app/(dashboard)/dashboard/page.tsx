@@ -46,12 +46,11 @@ export default function ApplicationsDashboard() {
   const {
     token,
     isLoading: authLoading,
-    checkAuthStatus,
   } = useAuthStore()
 
-  useEffect(() => {
-    checkAuthStatus()
-  }, [checkAuthStatus])
+  // useEffect(() => {
+  //   checkAuthStatus()
+  // }, [checkAuthStatus])
 
   const {
     appsQuery,
