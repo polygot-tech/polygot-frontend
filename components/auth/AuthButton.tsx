@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { useAuthStore } from "@/store/auth.store"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -10,19 +10,24 @@ import { AlertCircle } from "lucide-react"
 
 export function AuthButton() {
   const [mounted, setMounted] = useState(false)
-  const { user, isLoading, error, checkAuthStatus } = useAuthStore()
+  const { user, isLoading, error, hasChecked, checkAuthStatus } = useAuthStore()
 
   // Prevent hydration mismatch by only rendering after mount
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // Check auth status only after component is mounted (client-side only)
-  useEffect(() => {
-    if (mounted) {
+  // Memoize the auth check function to prevent recreating it
+  const handleAuthCheck = useCallback(() => {
+    if (mounted && !hasChecked && !isLoading) {
       checkAuthStatus()
     }
-  }, [mounted, checkAuthStatus])
+  }, [mounted, hasChecked, isLoading, checkAuthStatus])
+
+  // Check auth status only once after component is mounted
+  useEffect(() => {
+    handleAuthCheck()
+  }, [handleAuthCheck])
 
   // Show loading state during hydration
   if (!mounted) {
@@ -47,7 +52,11 @@ export function AuthButton() {
       <Button
         variant="outline"
         size="sm"
-        onClick={() => checkAuthStatus()}
+        onClick={() => {
+          // Reset hasChecked to allow retry
+          useAuthStore.setState({ hasChecked: false })
+          checkAuthStatus()
+        }}
         className="border-red-200 text-red-700 hover:bg-red-50"
         title={`Error: ${error}. Click to retry.`}
       >

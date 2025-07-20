@@ -15,6 +15,7 @@ interface AuthState {
   token: string | null
   isLoading: boolean
   error: string | null
+  hasChecked: boolean // Add this to prevent repeated calls
   setUser: (user: User | null) => void
   setLoading: (loading: boolean) => void
   setToken: (token: string | null) => void
@@ -31,6 +32,7 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       isLoading: false,
       error: null,
+      hasChecked: false, // Track if we've already checked
 
       setUser: (user: User | null) => set({ user }),
       setLoading: (isLoading: boolean) => set({ isLoading }),
@@ -38,6 +40,17 @@ export const useAuthStore = create<AuthState>()(
       setError: (error: string | null) => set({ error }),
 
       checkAuthStatus: async () => {
+        // Prevent multiple simultaneous calls
+        if (get().isLoading) {
+          console.log("🔄 Auth check already in progress, skipping...")
+          return
+        }
+
+        // Only run on client side
+        if (typeof window === "undefined") {
+          return
+        }
+
         // Clear any previous errors
         set({ error: null })
 
@@ -53,7 +66,7 @@ export const useAuthStore = create<AuthState>()(
 
         if (!currentToken) {
           console.log("❌ No token found, user not authenticated")
-          set({ user: null, isLoading: false })
+          set({ user: null, isLoading: false, hasChecked: true })
           return
         }
 
@@ -83,7 +96,7 @@ export const useAuthStore = create<AuthState>()(
           if (response.ok) {
             const data = await response.json()
             console.log("✅ Auth check successful, user:", data.user?.name)
-            set({ user: data.user, isLoading: false, error: null })
+            set({ user: data.user, isLoading: false, error: null, hasChecked: true })
           } else {
             const errorText = await response.text().catch(() => "Unknown error")
             console.error("❌ Auth check failed:", response.status, errorText)
@@ -91,9 +104,9 @@ export const useAuthStore = create<AuthState>()(
             // If unauthorized, clear the token
             if (response.status === 401) {
               get().setToken(null)
-              set({ user: null, isLoading: false, error: "Session expired" })
+              set({ user: null, isLoading: false, error: "Session expired", hasChecked: true })
             } else {
-              set({ user: null, isLoading: false, error: `Server error: ${response.status}` })
+              set({ user: null, isLoading: false, error: `Server error: ${response.status}`, hasChecked: true })
             }
           }
         } catch (error: any) {
@@ -114,6 +127,7 @@ export const useAuthStore = create<AuthState>()(
             user: null,
             isLoading: false,
             error: errorMessage,
+            hasChecked: true,
           })
         }
       },
@@ -134,17 +148,17 @@ export const useAuthStore = create<AuthState>()(
             const data = await response.json()
             if (data.token && data.user) {
               get().setToken(data.token)
-              set({ user: data.user, isLoading: false, error: null })
+              set({ user: data.user, isLoading: false, error: null, hasChecked: true })
               return true
             }
           }
 
           const errorData = await response.json().catch(() => ({ message: "Login failed" }))
-          set({ user: null, isLoading: false, error: errorData.message })
+          set({ user: null, isLoading: false, error: errorData.message, hasChecked: true })
           return false
         } catch (error: any) {
           console.error("Login failed:", error)
-          set({ user: null, isLoading: false, error: "Network error during login" })
+          set({ user: null, isLoading: false, error: "Network error during login", hasChecked: true })
           return false
         }
       },
@@ -167,7 +181,7 @@ export const useAuthStore = create<AuthState>()(
           // Ignore logout errors
         } finally {
           get().setToken(null)
-          set({ user: null, error: null })
+          set({ user: null, error: null, hasChecked: true })
           console.log("Logged out. Token cleared.")
         }
       },
