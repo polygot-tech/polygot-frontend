@@ -99,7 +99,7 @@ const floatingWords = [
 
 export default function HeroSection() {
   const [currentLangIndex, setCurrentLangIndex] = useState(0)
-  const router=useRouter()
+  const router = useRouter()
   const [copied, setCopied] = useState(false)
   const currentTranslation = translations[currentLangIndex]
   const containerRef = useRef<HTMLDivElement>(null)
@@ -164,7 +164,7 @@ export default function HeroSection() {
         ref={containerRef}
         className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-green-50/30"
       >
-  
+
 
         {/* Floating Words - Optimized */}
         <div className="absolute inset-0 pointer-events-none">
@@ -251,13 +251,14 @@ export default function HeroSection() {
               <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
                 {/* NPM Install Button */}
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button
-                    size="lg"
-                    className="h-14 px-6 text-lg bg-gray-900 hover:bg-gray-800 text-green-400 font-mono rounded-xl transition-all duration-300 group relative overflow-hidden"
+                  <div
+                    className="w-76 flex items-center justify-between h-14 px-6 text-lg bg-gray-900 hover:bg-gray-800 text-green-400 font-mono rounded-xl transition-all duration-300 group relative overflow-hidden"
                     onClick={handleCopyClick}
                   >
                     <Code className="mr-3 h-5 w-5 text-green-400" />
-                    npm i polygot
+                    <p className="flex-grow">
+                      npm i polygot
+                    </p>
                     <motion.div
                       className="ml-3 flex items-center"
                       initial={false}
@@ -281,14 +282,14 @@ export default function HeroSection() {
                     >
                       <LinkIcon className="h-4 w-4" />
                     </Button>
-                  </Button>
+                  </div>
                 </motion.div>
 
                 {/* Documentation Button */}
                 <Button
                   variant="outline"
                   size="lg"
-                  onClick={()=>router.push("/docs")}
+                  onClick={() => router.push("/docs")}
                   className="h-14 px-8 text-lg border-green-200 text-green-700 hover:bg-green-50 hover:border-green-300 rounded-xl transition-all duration-300 bg-transparent"
                 >
                   View Documentation
@@ -305,13 +306,13 @@ export default function HeroSection() {
               animate={
                 laptopInView
                   ? {
-                      opacity: 1,
-                      x: 0,
-                      transition: {
-                        duration: 0.8,
-                        ease: [0.25, 0.46, 0.45, 0.94],
-                      },
-                    }
+                    opacity: 1,
+                    x: 0,
+                    transition: {
+                      duration: 0.8,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    },
+                  }
                   : {}
               }
               className="relative"
@@ -395,7 +396,7 @@ export default function HeroSection() {
                           </div>
 
                           {/* Feature Cards */}
-                         
+
                         </div>
                       </div>
                     </div>
@@ -407,8 +408,8 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-       
-       
+
+
 
           {/* Documentation Section */}
           <motion.section
@@ -419,7 +420,7 @@ export default function HeroSection() {
             className="mb-24"
           >
             <div className="text-center mb-16">
-             
+
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
                 Everything You Need to{" "}
                 <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -458,7 +459,7 @@ export default function HeroSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
-                  onClick={()=>router.push("/docs")}
+                  onClick={() => router.push("/docs")}
                   whileHover={{ y: -5, scale: 1.02 }}
                   className="group relative bg-white rounded-2xl p-8 border border-gray-200 hover:border-green-300 transition-all duration-300 cursor-pointer"
                 >
@@ -488,8 +489,8 @@ export default function HeroSection() {
             </div>
           </motion.section>
 
-   {/* Pricing Section */}
-                 <motion.section
+          {/* Pricing Section */}
+          <motion.section
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -497,7 +498,7 @@ export default function HeroSection() {
             className="mb-24"
           >
             <div className="text-center mb-16">
-              
+
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
                 Choose Your{" "}
                 <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -582,10 +583,10 @@ export default function HeroSection() {
                       ))}
                     </div>
                     <NextLink href="/pricing">
-                    <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 text-lg font-medium transition-all duration-300">
-                      Get Started
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
+                      <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 text-lg font-medium transition-all duration-300">
+                        Get Started
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
                     </NextLink>
                   </div>
                 </CardContent>
@@ -620,10 +621,10 @@ export default function HeroSection() {
                       ))}
                     </div>
                     <NextLink href='/pricing'>
-                    <Button className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-3 text-lg font-medium transition-all duration-300">
-                      Contact Sales
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
+                      <Button className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-3 text-lg font-medium transition-all duration-300">
+                        Contact Sales
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
                     </NextLink>
                   </div>
                 </CardContent>
