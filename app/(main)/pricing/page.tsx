@@ -1,4 +1,5 @@
 "use client"
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -6,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
   Check,
   Mail,
@@ -40,6 +42,184 @@ interface PaymentFormData {
   zipcode: string
 }
 
+const countries = [
+  { code: "US", name: "United States" },
+  { code: "CA", name: "Canada" },
+  { code: "GB", name: "United Kingdom" },
+  { code: "AU", name: "Australia" },
+  { code: "DE", name: "Germany" },
+  { code: "FR", name: "France" },
+  { code: "IT", name: "Italy" },
+  { code: "ES", name: "Spain" },
+  { code: "NL", name: "Netherlands" },
+  { code: "BE", name: "Belgium" },
+  { code: "CH", name: "Switzerland" },
+  { code: "AT", name: "Austria" },
+  { code: "SE", name: "Sweden" },
+  { code: "NO", name: "Norway" },
+  { code: "DK", name: "Denmark" },
+  { code: "FI", name: "Finland" },
+  { code: "IE", name: "Ireland" },
+  { code: "PT", name: "Portugal" },
+  { code: "GR", name: "Greece" },
+  { code: "PL", name: "Poland" },
+  { code: "CZ", name: "Czech Republic" },
+  { code: "HU", name: "Hungary" },
+  { code: "SK", name: "Slovakia" },
+  { code: "SI", name: "Slovenia" },
+  { code: "HR", name: "Croatia" },
+  { code: "RO", name: "Romania" },
+  { code: "BG", name: "Bulgaria" },
+  { code: "EE", name: "Estonia" },
+  { code: "LV", name: "Latvia" },
+  { code: "LT", name: "Lithuania" },
+  { code: "LU", name: "Luxembourg" },
+  { code: "MT", name: "Malta" },
+  { code: "CY", name: "Cyprus" },
+  { code: "IS", name: "Iceland" },
+  { code: "LI", name: "Liechtenstein" },
+  { code: "MC", name: "Monaco" },
+  { code: "SM", name: "San Marino" },
+  { code: "VA", name: "Vatican City" },
+  { code: "AD", name: "Andorra" },
+  { code: "JP", name: "Japan" },
+  { code: "KR", name: "South Korea" },
+  { code: "CN", name: "China" },
+  { code: "IN", name: "India" },
+  { code: "SG", name: "Singapore" },
+  { code: "HK", name: "Hong Kong" },
+  { code: "TW", name: "Taiwan" },
+  { code: "MY", name: "Malaysia" },
+  { code: "TH", name: "Thailand" },
+  { code: "PH", name: "Philippines" },
+  { code: "ID", name: "Indonesia" },
+  { code: "VN", name: "Vietnam" },
+  { code: "BD", name: "Bangladesh" },
+  { code: "PK", name: "Pakistan" },
+  { code: "LK", name: "Sri Lanka" },
+  { code: "NP", name: "Nepal" },
+  { code: "BT", name: "Bhutan" },
+  { code: "MV", name: "Maldives" },
+  { code: "AF", name: "Afghanistan" },
+  { code: "IR", name: "Iran" },
+  { code: "IQ", name: "Iraq" },
+  { code: "SA", name: "Saudi Arabia" },
+  { code: "AE", name: "United Arab Emirates" },
+  { code: "QA", name: "Qatar" },
+  { code: "KW", name: "Kuwait" },
+  { code: "BH", name: "Bahrain" },
+  { code: "OM", name: "Oman" },
+  { code: "YE", name: "Yemen" },
+  { code: "JO", name: "Jordan" },
+  { code: "LB", name: "Lebanon" },
+  { code: "SY", name: "Syria" },
+  { code: "IL", name: "Israel" },
+  { code: "PS", name: "Palestine" },
+  { code: "TR", name: "Turkey" },
+  { code: "EG", name: "Egypt" },
+  { code: "LY", name: "Libya" },
+  { code: "TN", name: "Tunisia" },
+  { code: "DZ", name: "Algeria" },
+  { code: "MA", name: "Morocco" },
+  { code: "SD", name: "Sudan" },
+  { code: "SS", name: "South Sudan" },
+  { code: "ET", name: "Ethiopia" },
+  { code: "ER", name: "Eritrea" },
+  { code: "DJ", name: "Djibouti" },
+  { code: "SO", name: "Somalia" },
+  { code: "KE", name: "Kenya" },
+  { code: "UG", name: "Uganda" },
+  { code: "TZ", name: "Tanzania" },
+  { code: "RW", name: "Rwanda" },
+  { code: "BI", name: "Burundi" },
+  { code: "MG", name: "Madagascar" },
+  { code: "MU", name: "Mauritius" },
+  { code: "SC", name: "Seychelles" },
+  { code: "KM", name: "Comoros" },
+  { code: "ZA", name: "South Africa" },
+  { code: "NA", name: "Namibia" },
+  { code: "BW", name: "Botswana" },
+  { code: "ZW", name: "Zimbabwe" },
+  { code: "ZM", name: "Zambia" },
+  { code: "MW", name: "Malawi" },
+  { code: "MZ", name: "Mozambique" },
+  { code: "SZ", name: "Eswatini" },
+  { code: "LS", name: "Lesotho" },
+  { code: "AO", name: "Angola" },
+  { code: "CD", name: "Democratic Republic of the Congo" },
+  { code: "CG", name: "Republic of the Congo" },
+  { code: "CF", name: "Central African Republic" },
+  { code: "CM", name: "Cameroon" },
+  { code: "TD", name: "Chad" },
+  { code: "NE", name: "Niger" },
+  { code: "NG", name: "Nigeria" },
+  { code: "BJ", name: "Benin" },
+  { code: "TG", name: "Togo" },
+  { code: "GH", name: "Ghana" },
+  { code: "CI", name: "Côte d'Ivoire" },
+  { code: "LR", name: "Liberia" },
+  { code: "SL", name: "Sierra Leone" },
+  { code: "GN", name: "Guinea" },
+  { code: "GW", name: "Guinea-Bissau" },
+  { code: "SN", name: "Senegal" },
+  { code: "GM", name: "Gambia" },
+  { code: "ML", name: "Mali" },
+  { code: "BF", name: "Burkina Faso" },
+  { code: "MR", name: "Mauritania" },
+  { code: "CV", name: "Cape Verde" },
+  { code: "ST", name: "São Tomé and Príncipe" },
+  { code: "GQ", name: "Equatorial Guinea" },
+  { code: "GA", name: "Gabon" },
+  { code: "BR", name: "Brazil" },
+  { code: "AR", name: "Argentina" },
+  { code: "CL", name: "Chile" },
+  { code: "PE", name: "Peru" },
+  { code: "CO", name: "Colombia" },
+  { code: "VE", name: "Venezuela" },
+  { code: "EC", name: "Ecuador" },
+  { code: "BO", name: "Bolivia" },
+  { code: "PY", name: "Paraguay" },
+  { code: "UY", name: "Uruguay" },
+  { code: "GY", name: "Guyana" },
+  { code: "SR", name: "Suriname" },
+  { code: "MX", name: "Mexico" },
+  { code: "GT", name: "Guatemala" },
+  { code: "BZ", name: "Belize" },
+  { code: "SV", name: "El Salvador" },
+  { code: "HN", name: "Honduras" },
+  { code: "NI", name: "Nicaragua" },
+  { code: "CR", name: "Costa Rica" },
+  { code: "PA", name: "Panama" },
+  { code: "CU", name: "Cuba" },
+  { code: "JM", name: "Jamaica" },
+  { code: "HT", name: "Haiti" },
+  { code: "DO", name: "Dominican Republic" },
+  { code: "TT", name: "Trinidad and Tobago" },
+  { code: "BB", name: "Barbados" },
+  { code: "LC", name: "Saint Lucia" },
+  { code: "GD", name: "Grenada" },
+  { code: "VC", name: "Saint Vincent and the Grenadines" },
+  { code: "AG", name: "Antigua and Barbuda" },
+  { code: "KN", name: "Saint Kitts and Nevis" },
+  { code: "DM", name: "Dominica" },
+  { code: "BS", name: "Bahamas" },
+  { code: "NZ", name: "New Zealand" },
+  { code: "FJ", name: "Fiji" },
+  { code: "PG", name: "Papua New Guinea" },
+  { code: "SB", name: "Solomon Islands" },
+  { code: "VU", name: "Vanuatu" },
+  { code: "NC", name: "New Caledonia" },
+  { code: "PF", name: "French Polynesia" },
+  { code: "WS", name: "Samoa" },
+  { code: "TO", name: "Tonga" },
+  { code: "KI", name: "Kiribati" },
+  { code: "TV", name: "Tuvalu" },
+  { code: "NR", name: "Nauru" },
+  { code: "PW", name: "Palau" },
+  { code: "FM", name: "Micronesia" },
+  { code: "MH", name: "Marshall Islands" },
+]
+
 export default function PricingPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: string } | null>(null)
@@ -54,7 +234,6 @@ export default function PricingPage() {
   })
 
   const token = "test_token" // Replace with your actual token retrieval logic
-
   const { mutate: createPayment, isPending, data, error, isSuccess, isError } = useCreatePayment(token || "")
 
   // Handle payment response effects
@@ -62,16 +241,13 @@ export default function PricingPage() {
     if (isSuccess && data) {
       console.log("Payment creation successful:", data)
       toast.success("Payment link created successfully!")
-
       // If the API returns a payment link, redirect to it
       if (data.paymentLink) {
         console.log("Redirecting to payment link:", data.paymentLink)
         window.open(data.paymentLink, "_blank")
       }
-
       // Close the dialog
       setIsDialogOpen(false)
-
       // Reset form data
       setFormData({
         name: "",
@@ -100,7 +276,6 @@ export default function PricingPage() {
   }
 
   const handlePlanSelect = (planName: string, price: string) => {
-    return 
     setSelectedPlan({ name: planName, price })
     setIsDialogOpen(true)
   }
@@ -138,8 +313,8 @@ export default function PricingPage() {
 
     // Create payment
     createPayment({
-      customer:formData,
-      type:selectedPlan?.name.toLowerCase() as string
+      customer: formData,
+      type: selectedPlan?.name.toLowerCase() as string,
     })
   }
 
@@ -478,14 +653,14 @@ export default function PricingPage() {
                 <div className="mx-auto w-16 h-16 bg-gradient-to-br from-emerald-600 to-green-600 rounded-2xl flex items-center justify-center mb-4 shadow-xl">
                   <CreditCard className="h-8 w-8 text-white" />
                 </div>
-                <DialogTitle className="text-3xl font-bold text-gray-900">Complete Your Order</DialogTitle>
-                <p className="text-gray-600 mt-2">
-                  You&apos;re subscribing to the <span className="font-semibold text-emerald-600">{selectedPlan?.name}</span>{" "}
-                  plan for <span className="font-semibold text-emerald-600">{selectedPlan?.price}/month</span>
+                <DialogTitle className="text-3xl text-center font-bold text-gray-900">Complete Your Order</DialogTitle>
+                <p className="text-gray-600 text-center mt-2">
+                  You&apos;re subscribing to the{" "}
+                  <span className="font-semibold text-emerald-600">{selectedPlan?.name}</span> plan for{" "}
+                  <span className="font-semibold text-emerald-600">{selectedPlan?.price}/month</span>
                 </p>
               </DialogHeader>
             </div>
-
             <div className="p-8 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
@@ -514,7 +689,6 @@ export default function PricingPage() {
                   />
                 </div>
               </div>
-
               <div className="space-y-2">
                 <Label htmlFor="street" className="text-sm font-semibold text-gray-700">
                   Street Address
@@ -527,7 +701,6 @@ export default function PricingPage() {
                   className="h-12 border-gray-200 focus:border-emerald-500 focus:ring-emerald-500"
                 />
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="city" className="text-sm font-semibold text-gray-700">
@@ -566,20 +739,23 @@ export default function PricingPage() {
                   />
                 </div>
               </div>
-
               <div className="space-y-2">
                 <Label htmlFor="country" className="text-sm font-semibold text-gray-700">
                   Country
                 </Label>
-                <Input
-                  id="country"
-                  placeholder="United States"
-                  value={formData.country}
-                  onChange={(e) => handleInputChange("country", e.target.value)}
-                  className="h-12 border-gray-200 focus:border-emerald-500 focus:ring-emerald-500"
-                />
+                <Select value={formData.country} onValueChange={(value) => handleInputChange("country", value)}>
+                  <SelectTrigger className="h-12 border-gray-200 focus:border-emerald-500 focus:ring-emerald-500">
+                    <SelectValue placeholder="Select your country" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-[200px]">
+                    {countries.map((country) => (
+                      <SelectItem key={country.code} value={country.code}>
+                        {country.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-
               <div className="bg-gray-50 rounded-xl p-6 mt-8">
                 <div className="flex items-center justify-between text-lg font-semibold">
                   <span>Total</span>
@@ -587,7 +763,6 @@ export default function PricingPage() {
                 </div>
                 <p className="text-sm text-gray-500 mt-2">Billed monthly • Cancel anytime</p>
               </div>
-
               {error && (
                 <div className="bg-red-50 border border-red-200 rounded-xl p-4 mt-4">
                   <p className="text-red-600 text-sm font-medium">
@@ -595,7 +770,6 @@ export default function PricingPage() {
                   </p>
                 </div>
               )}
-
               <Button
                 onClick={handleContinueToPayment}
                 disabled={isPending || !token}
@@ -604,7 +778,6 @@ export default function PricingPage() {
                 <Lock className="mr-3 h-5 w-5" />
                 {isPending ? "Processing..." : "Continue to Payment"}
               </Button>
-
               <p className="text-xs text-gray-500 text-center mt-4">
                 Your payment information is secure and encrypted. By continuing, you agree to our Terms of Service and
                 Privacy Policy.
@@ -616,4 +789,3 @@ export default function PricingPage() {
     </>
   )
 }
-
