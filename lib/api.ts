@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const BASE_API_URL = process.env.NEXT_BACKEND_URL ||"https://terrific-freedom-production.up.railway.app"
+const dev = false
+
+export const BASE_API_URL = dev?"http://localhost:3001":(process.env.NEXT_BACKEND_URL || "https://api.polygot.tech")
 
 
 export const apiClient = axios.create({
