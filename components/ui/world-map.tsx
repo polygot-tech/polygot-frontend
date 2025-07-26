@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion } from "motion/react";
 import DottedMap from "dotted-map";
-
 import { useTheme } from "next-themes";
 
 interface MapProps {
@@ -25,9 +24,9 @@ export function WorldMap({
 
   const svgMap = map.getSVG({
     radius: 0.22,
-    color: theme === "dark" ? "#FFFFFF40" : "#00000040",
+    color: theme === "dark" ? "#4B5563" : "#9CA3AF", // Better contrast for dark mode
     shape: "circle",
-    backgroundColor: theme === "dark" ? "black" : "white",
+    backgroundColor: "transparent", // Transparent background to blend with page
   });
 
   const projectPoint = (lat: number, lng: number) => {
@@ -51,11 +50,24 @@ export function WorldMap({
     return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
   };
 
+  // Dynamic colors based on theme
+  const getLineColor = () => {
+    return theme === "dark" ? "#22c55e" : lineColor; // Brighter green for dark mode
+  };
+
+  const getDotColor = () => {
+    return theme === "dark" ? "#22c55e" : lineColor; // Brighter green for dark mode
+  };
+
+  const getGlowColor = () => {
+    return theme === "dark" ? "#22c55e" : lineColor; // Glow effect for dark mode
+  };
+
   return (
-    <div className="w-full aspect-[2/1] dark:bg-black bg-white rounded-lg relative font-sans">
+    <div className="w-full aspect-[2/1] relative font-sans">
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
+        className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none opacity-70 dark:opacity-50"
         alt="world map"
         height="495"
         width="1056"
@@ -66,16 +78,51 @@ export function WorldMap({
         viewBox="0 0 800 400"
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
+        {/* Background glow effect for dark mode */}
+        {theme === "dark" && (
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+        )}
+
         {dots.map((dot, i) => {
           const startPoint = projectPoint(dot.start.lat, dot.start.lng);
           const endPoint = projectPoint(dot.end.lat, dot.end.lng);
           return (
             <g key={`path-group-${i}`}>
+              {/* Glow effect for dark mode */}
+              {theme === "dark" && (
+                <motion.path
+                  d={createCurvedPath(startPoint, endPoint)}
+                  fill="none"
+                  stroke={getGlowColor()}
+                  strokeWidth="3"
+                  opacity="0.3"
+                  filter="url(#glow)"
+                  initial={{
+                    pathLength: 0,
+                  }}
+                  animate={{
+                    pathLength: 1,
+                  }}
+                  transition={{
+                    duration: 1.2,
+                    delay: 0.3 * i,
+                    ease: "easeOut",
+                  }}
+                />
+              )}
               <motion.path
                 d={createCurvedPath(startPoint, endPoint)}
                 fill="none"
                 stroke="url(#path-gradient)"
-                strokeWidth="1"
+                strokeWidth={theme === "dark" ? "2" : "1"}
                 initial={{
                   pathLength: 0,
                 }}
@@ -95,34 +142,45 @@ export function WorldMap({
 
         <defs>
           <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
+            <stop offset="0%" stopColor={theme === "dark" ? "#22c55e" : "white"} stopOpacity="0" />
+            <stop offset="5%" stopColor={getLineColor()} stopOpacity="1" />
+            <stop offset="95%" stopColor={getLineColor()} stopOpacity="1" />
+            <stop offset="100%" stopColor={theme === "dark" ? "#22c55e" : "white"} stopOpacity="0" />
           </linearGradient>
         </defs>
 
         {dots.map((dot, i) => (
           <g key={`points-group-${i}`}>
             <g key={`start-${i}`}>
+              {/* Glow effect for dots in dark mode */}
+              {theme === "dark" && (
+                <circle
+                  cx={projectPoint(dot.start.lat, dot.start.lng).x}
+                  cy={projectPoint(dot.start.lat, dot.start.lng).y}
+                  r="6"
+                  fill={getGlowColor()}
+                  opacity="0.3"
+                  filter="url(#glow)"
+                />
+              )}
               {/* Main connection dot */}
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
+                r={theme === "dark" ? "3" : "2"}
+                fill={getDotColor()}
               />
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
+                r={theme === "dark" ? "3" : "2"}
+                fill={getDotColor()}
                 opacity="0.5"
               >
                 <animate
                   attributeName="r"
-                  from="2"
-                  to="8"
+                  from={theme === "dark" ? "3" : "2"}
+                  to={theme === "dark" ? "12" : "8"}
                   dur="1.5s"
                   begin="0s"
                   repeatCount="indefinite"
@@ -138,23 +196,34 @@ export function WorldMap({
               </circle>
             </g>
             <g key={`end-${i}`}>
+              {/* Glow effect for dots in dark mode */}
+              {theme === "dark" && (
+                <circle
+                  cx={projectPoint(dot.end.lat, dot.end.lng).x}
+                  cy={projectPoint(dot.end.lat, dot.end.lng).y}
+                  r="6"
+                  fill={getGlowColor()}
+                  opacity="0.3"
+                  filter="url(#glow)"
+                />
+              )}
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
+                r={theme === "dark" ? "3" : "2"}
+                fill={getDotColor()}
               />
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
+                r={theme === "dark" ? "3" : "2"}
+                fill={getDotColor()}
                 opacity="0.5"
               >
                 <animate
                   attributeName="r"
-                  from="2"
-                  to="8"
+                  from={theme === "dark" ? "3" : "2"}
+                  to={theme === "dark" ? "12" : "8"}
                   dur="1.5s"
                   begin="0s"
                   repeatCount="indefinite"
