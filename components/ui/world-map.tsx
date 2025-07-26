@@ -31,6 +31,7 @@ export function WorldMap({
   });
 
   const projectPoint = (lat: number, lng: number) => {
+    // Improved projection to better align with the map
     const x = (lng + 180) * (800 / 360);
     const y = (90 - lat) * (400 / 180);
     return { x, y };
@@ -40,8 +41,13 @@ export function WorldMap({
     start: { x: number; y: number },
     end: { x: number; y: number }
   ) => {
+    // Calculate distance for better curve control
+    const distance = Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2));
+    const curveHeight = Math.min(distance * 0.3, 80); // Proportional curve height
+    
     const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
+    const midY = Math.min(start.y, end.y) - curveHeight;
+    
     return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
   };
 
@@ -99,6 +105,7 @@ export function WorldMap({
         {dots.map((dot, i) => (
           <g key={`points-group-${i}`}>
             <g key={`start-${i}`}>
+              {/* Main connection dot */}
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}

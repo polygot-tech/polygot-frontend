@@ -70,16 +70,16 @@ export function AuthButton() {
     return (
       <Link
         href="/dashboard"
-        className="flex items-center gap-3 rounded-full p-1 pr-4 transition-colors hover:bg-gray-100"
+        className="flex items-center gap-3 rounded-full p-1 pr-4 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
         title={`Go to dashboard - ${user.name}`}
       >
         <Avatar className="h-8 w-8">
           <AvatarImage src={user.profile_image || undefined} alt={user.name} />
-          <AvatarFallback className="bg-green-100 text-green-700 font-semibold">
+          <AvatarFallback className="bg-green-100 text-green-700 font-semibold dark:bg-green-900 dark:text-green-300">
             {user.name.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <span className="hidden sm:inline text-sm font-medium text-gray-700">{user.name}</span>
+        <span className="hidden sm:inline text-sm font-medium text-gray-700 dark:text-gray-200">{user.name}</span>
       </Link>
     )
   }
@@ -87,7 +87,7 @@ export function AuthButton() {
   return (
     <Button
       variant="outline"
-      className="border-emerald-200 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 bg-transparent"
+      className="border-emerald-200 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 bg-transparent dark:border-emerald-700 dark:text-emerald-300 dark:hover:bg-emerald-900/30 dark:hover:border-emerald-600"
       asChild
     >
       <a href={`${BASE_API_URL}/api/v1/auth/google`}>Sign in</a>

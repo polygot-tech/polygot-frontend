@@ -8,47 +8,41 @@ import { Globe, Users, Languages, Zap } from "lucide-react";
 import Link from "next/link";
 
 export default function GlobalReachSection() {
-  // Sample global connections showing translation reach
+  // Clean, aesthetic global connections
   const globalConnections = [
-    // North America to Europe
-    {
-      start: { lat: 40.7128, lng: -74.0060, label: "New York" },
-      end: { lat: 51.5074, lng: -0.1278, label: "London" },
-    },
-    // North America to Asia
+    // Trans-Pacific: San Francisco to Tokyo
     {
       start: { lat: 37.7749, lng: -122.4194, label: "San Francisco" },
-      end: { lat: 35.6762, lng: 139.6503, label: "Tokyo" },
+      end:   { lat: 48.8566, lng: 2.3522, label: "Paris" }  ,
     },
-    // Europe to Asia
+    // Trans-Atlantic: New York to London
     {
       start: { lat: 48.8566, lng: 2.3522, label: "Paris" },
-      end: { lat: 39.9042, lng: 116.4074, label: "Beijing" },
+      end:   { lat: -34.6037, lng: -58.3816, label: "Buenos Aires" },
     },
-    // Europe to Africa
+    // Europe to Asia: Paris to Beijing
     {
-      start: { lat: 52.5200, lng: 13.4050, label: "Berlin" },
-      end: { lat: -26.2041, lng: 28.0473, label: "Johannesburg" },
+      start: { lat: -34.6037, lng: -58.3816, label: "Buenos Aires" },
+      end:   { lat: -33.9249, lng: 18.4241, label: "Cape Town" },
     },
-    // Asia to Australia
+    // Asia-Pacific: Singapore to Sydney
     {
-      start: { lat: 1.3521, lng: 103.8198, label: "Singapore" },
-      end: { lat: -33.8688, lng: 151.2093, label: "Sydney" },
+      start: { lat: -33.9249, lng: 18.4241, label: "Cape Town" },
+      end:   { lat: 25.276987, lng: 55.296249, label: "Dubai" },
     },
-    // South America connections
+    // Europe to Africa: Berlin to Cape Town
     {
-      start: { lat: -23.5505, lng: -46.6333, label: "São Paulo" },
-      end: { lat: 40.7128, lng: -74.0060, label: "New York" },
+      start: { lat: 25.276987, lng: 55.296249, label: "Dubai" },
+      end:   { lat: -33.8688, lng: 151.2093, label: "Sydney" },
     },
-    // Middle East to Europe
+    // South America to Europe: São Paulo to Madrid
     {
-      start: { lat: 25.2048, lng: 55.2708, label: "Dubai" },
-      end: { lat: 51.5074, lng: -0.1278, label: "London" },
+      start: { lat: -33.8688, lng: 151.2093, label: "Sydney" },
+      end:   { lat: 35.6895, lng: 139.6917, label: "Tokyo" },
     },
-    // India to Europe
     {
-      start: { lat: 19.0760, lng: 72.8777, label: "Mumbai" },
-      end: { lat: 48.8566, lng: 2.3522, label: "Paris" },
+      start: { lat: 35.6895, lng: 139.6917, label: "Tokyo" },
+      end:   { lat: 37.7749, lng: -122.4194, label: "San Francisco" },
     },
   ];
 
@@ -80,7 +74,7 @@ export default function GlobalReachSection() {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-green-50/30">
+    <section className="py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -90,17 +84,17 @@ export default function GlobalReachSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0 text-sm font-medium mb-6">
+          <Badge className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0 text-sm font-medium mb-6 dark:from-green-400 dark:to-emerald-500">
             <Globe className="mr-2 h-4 w-4" />
             Global Reach
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6 dark:text-white">
             Translate Your Website to{" "}
-            <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent dark:from-green-400 dark:via-emerald-400 dark:to-teal-400">
               Any Language Worldwide
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-gray-300">
             Break down language barriers and reach billions of users across the globe. 
             Polygot makes your content accessible in over 100 languages with just one line of code.
           </p>
@@ -116,47 +110,14 @@ export default function GlobalReachSection() {
         >
           <div className="relative max-w-6xl mx-auto">
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-transparent to-emerald-50/50 rounded-3xl blur-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-transparent to-emerald-50/50 rounded-3xl blur-3xl dark:from-green-900/40 dark:to-emerald-900/40"></div>
             
-            {/* Map Container with Enhanced Styling */}
-            <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-green-100/50">
+            {/* World Map - Full Screen Display */}
+            <div className="relative w-full">
               <WorldMap 
                 dots={globalConnections} 
                 lineColor="#10b981"
               />
-              
-              {/* Floating Stats Cards - Enhanced */}
-              <div className="absolute inset-0 pointer-events-none">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.8, 
-                      delay: index * 0.15,
-                      ease: "easeOut"
-                    }}
-                    viewport={{ once: true }}
-                    className={`absolute bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-green-200/50 hover:shadow-2xl transition-all duration-300 ${
-                      index === 0 ? "top-6 left-6" :
-                      index === 1 ? "top-6 right-6" :
-                      index === 2 ? "bottom-6 left-6" :
-                      "bottom-6 right-6"
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <stat.icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                        <div className="text-sm font-semibold text-gray-700">{stat.label}</div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
             </div>
           </div>
         </motion.div>
@@ -178,13 +139,15 @@ export default function GlobalReachSection() {
               viewport={{ once: true }}
               className="group relative"
             >
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-green-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 text-white mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-green-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 dark:bg-gray-900/80 dark:border-green-900/50 dark:shadow-emerald-900/20">
+                <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 text-white mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg dark:from-green-400 dark:to-emerald-500">
                   <stat.icon className="h-8 w-8" />
                 </div>
-                <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">{stat.value}</div>
-                <div className="text-lg font-semibold text-gray-800 mb-3">{stat.label}</div>
-                <div className="text-sm text-gray-600 leading-relaxed">{stat.description}</div>
+                <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3 dark:from-green-400 dark:to-emerald-400">
+                  {stat.value}
+                </div>
+                <div className="text-lg font-semibold text-gray-800 mb-3 dark:text-gray-100">{stat.label}</div>
+                <div className="text-sm text-gray-600 leading-relaxed dark:text-gray-300">{stat.description}</div>
               </div>
             </motion.div>
           ))}
@@ -198,19 +161,12 @@ export default function GlobalReachSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="relative overflow-hidden bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 rounded-3xl p-16 text-white shadow-2xl">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
-            
-            {/* Floating Elements */}
-            <div className="absolute top-4 left-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
-            <div className="absolute bottom-4 right-4 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
-            
+          <div className="relative overflow-hidden bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 rounded-3xl p-16 text-white shadow-2xl dark:from-green-800 dark:via-emerald-900 dark:to-teal-900">
             <div className="relative z-10">
-              <h3 className="text-4xl font-bold mb-6">
+              <h3 className="text-4xl font-bold mb-6 dark:text-white">
                 Ready to Go Global?
               </h3>
-              <p className="text-xl text-green-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-green-100 mb-10 max-w-3xl mx-auto leading-relaxed dark:text-green-200">
                 Join thousands of developers who are already reaching global audiences 
                 with Polygot's powerful translation technology.
               </p>
@@ -219,7 +175,7 @@ export default function GlobalReachSection() {
                   <Button 
                     size="lg" 
                     variant="secondary"
-                    className="bg-white text-green-600 hover:bg-green-50 px-10 py-5 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    className="bg-white text-green-600 hover:bg-green-50 px-10 py-5 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 dark:bg-gray-900 dark:text-green-300 dark:hover:bg-gray-800"
                   >
                     Get Started Free
                   </Button>
@@ -228,7 +184,7 @@ export default function GlobalReachSection() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="border-2 border-white/30 text-white hover:bg-white hover:text-green-600 px-10 py-5 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
+                    className="border-2 border-white/30 text-white hover:bg-white hover:text-green-600 px-10 py-5 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 dark:border-green-300/30 dark:text-green-100 dark:hover:bg-green-900 dark:hover:text-white"
                   >
                     View Pricing
                   </Button>

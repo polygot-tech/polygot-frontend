@@ -61,12 +61,12 @@ export default function DocumentationPage() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30">
       <Header />
       <div className="container mx-auto px-6 lg:px-8 py-8 md:py-12">
         <div className="flex flex-col md:flex-row gap-12">
           {/* Sidebar */}
-          <aside className="w-full md:w-64 py-8 sticky top-20 h-fit bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-4">
+          <aside className="w-full md:w-64 py-8 sticky top-20 h-fit bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-4 dark:bg-gray-900/80 dark:shadow-gray-900/20">
             <nav className="space-y-1">
               {sidebarItems.map((item) => {
                 const Icon = item.icon
@@ -76,8 +76,8 @@ export default function DocumentationPage() {
                     onClick={() => setActiveSection(item.id)}
                     className={`w-full flex items-center gap-3 px-4 py-2 text-sm rounded-lg transition-colors text-left ${
                       activeSection === item.id
-                        ? "bg-emerald-50 text-emerald-700 font-medium border border-emerald-200 shadow-sm"
-                        : "text-gray-600 hover:text-emerald-700 hover:bg-emerald-50"
+                        ? "bg-emerald-50 text-emerald-700 font-medium border border-emerald-200 shadow-sm dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700"
+                        : "text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-emerald-900/20"
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -94,20 +94,20 @@ export default function DocumentationPage() {
             {activeSection === "overview" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Polygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Documentation
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     React translation library with intelligent context management and automatic content translation.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Installation</h2>
-                  <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Installation</h2>
+                  <div className="relative group bg-gray-900 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-6 text-white overflow-x-auto">
                       <code className="text-sm md:text-base">
                         <span className="text-cyan-400">npm</span> <span className="text-cyan-400">install</span>{" "}
@@ -119,12 +119,12 @@ export default function DocumentationPage() {
                 </section>
               
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Quick Start Example</h2>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Quick Start Example</h2>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                     This example demonstrates how to use `PolygotProvider`, `usePolygot`, `Polygot`, and `NoPolygot`
                     components to manage translations and prevent translation for specific content.
                   </p>
-                  <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                  <div className="relative group bg-gray-900 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-6 text-white overflow-x-auto">
                       <code className="text-sm md:text-base">
                         <span className="text-pink-400">import</span> {"{"}{" "}
@@ -545,25 +545,25 @@ export default App;`}
             {activeSection === "cli" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Polygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       CLI Tool
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     Generate static translation files for SEO optimization and improved performance.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Usage</h2>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Usage</h2>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                     Use the Polygot CLI to extract translatable strings from your React components and generate
                     language-specific JSON files. This is ideal for server-side rendering (SSR) and SEO, as search
                     engines can crawl pre-translated content.
                   </p>
-                  <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                  <div className="relative group bg-gray-900 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-6 text-white overflow-x-auto">
                       <code className="text-sm md:text-base">
                         <span className="text-cyan-400">npx</span> <span className="text-yellow-300">polygot</span>{" "}
@@ -573,18 +573,18 @@ export default App;`}
                     </pre>
                     <CopyButton code="npx polygot filename.[tsx,jsx] language1,language2,..." id="cli-command" />
                   </div>
-                  <p className="text-gray-600 leading-relaxed mt-4">
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
                     This command will process the specified file, extract all translatable strings, and generate JSON
                     files in the `locales/` directory for each specified language.
                   </p>
                 </section>
 
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Output Structure</h2>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Output Structure</h2>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                     Translation files will be generated in `locales/(language_code).json`.
                   </p>
-                  <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                  <div className="relative group bg-gray-900 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-6 text-white overflow-x-auto">
                       <code className="text-sm md:text-base">
                         <span className="text-gray-400">locales/</span>
@@ -620,23 +620,23 @@ export default App;`}
             {activeSection === "module-exports" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Polygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Module Exports
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     The main entry point for the Polygot library, re-exporting all core components and hooks.
                   </p>
                 </div>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">lib/polygot.ts</h2>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">lib/polygot.ts</h2>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                     This file serves as the primary export for the Polygot library, allowing you to import components
                     and hooks directly from `polygot`.
                   </p>
-                  <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                  <div className="relative group bg-gray-900 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-6 text-white overflow-x-auto">
                       <code className="text-sm md:text-base">
                         <span className="text-pink-400">export</span> {"{"}{" "}
@@ -674,19 +674,19 @@ export default App;`}
             {activeSection === "provider" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     PolygotProvider
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     Context provider that manages translation state and provides translation functions to child
                     components.
                   </p>
                 </div>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Props</h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg">
                     <table className="w-full">
                       <thead className="bg-emerald-50/50">
@@ -766,18 +766,18 @@ export default App;`}
             {activeSection === "hook" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     usePolygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Hook
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     Hook that provides access to translation functions and language state management.
                   </p>
                 </div>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Returns</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Returns</h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg">
                     <table className="w-full">
                       <thead className="bg-emerald-50/50">
@@ -827,18 +827,18 @@ export default App;`}
             {activeSection === "component" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Polygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     Component that automatically translates all text content within its children.
                   </p>
                 </div>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Props</h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg">
                     <table className="w-full">
                       <thead className="bg-emerald-50/50">
@@ -871,19 +871,19 @@ export default App;`}
             {activeSection === "local" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     PolygotLocal
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     Component that translates its children based on a provided JSON object instead of API calls. Perfect
                     for offline translations or when you have pre-defined translation mappings.
                   </p>
                 </div>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Props</h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg">
                     <table className="w-full">
                       <thead className="bg-emerald-50/50">
@@ -931,13 +931,13 @@ export default App;`}
                   </div>
                 </section>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Translation JSON Structure</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Translation JSON Structure</h2>
                   <div className="space-y-4">
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                       The translation JSON should follow this structure where each language code maps to an object
                       containing original text as keys and translated text as values:
                     </p>
-                    <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                    <div className="relative group bg-gray-900 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                       <pre className="p-6 text-white overflow-x-auto">
                         <code className="text-sm md:text-base">
                           <span className="text-gray-400">{"{"}</span>
@@ -986,8 +986,8 @@ export default App;`}
                   </div>
                 </section>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Example</h2>
-                  <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Example</h2>
+                  <div className="relative group bg-gray-900 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-6 text-white overflow-x-auto">
                       <code className="text-sm md:text-base">
                         <span className="text-pink-400">import</span> <span className="text-green-400">React</span>{" "}
@@ -1150,7 +1150,7 @@ export default App;`}
                   </div>
                 </section>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Benefits</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Benefits</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {[
                       {
@@ -1177,7 +1177,7 @@ export default App;`}
                         <h4 className="font-semibold mb-2 text-gray-900 group-hover:text-emerald-700 transition-colors">
                           {benefit.title}
                         </h4>
-                        <p className="text-gray-600 leading-relaxed">{benefit.desc}</p>
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{benefit.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -1189,18 +1189,18 @@ export default App;`}
             {activeSection === "nopolygot" && (
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                     NoPolygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     Component that prevents translation of its children, preserving original content.
                   </p>
                 </div>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Props</h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg">
                     <table className="w-full">
                       <thead className="bg-emerald-50/50">
@@ -1227,7 +1227,7 @@ export default App;`}
                   </div>
                 </section>
                 <section className="space-y-6">
-                  <h2 className="text-3xl font-bold text-gray-900">Use Cases</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Use Cases</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {[
                       { title: "Contact Information", desc: "Email addresses, phone numbers, physical addresses" },
@@ -1242,7 +1242,7 @@ export default App;`}
                         <h4 className="font-semibold mb-2 text-gray-900 group-hover:text-emerald-700 transition-colors">
                           {useCase.title}
                         </h4>
-                        <p className="text-gray-600 leading-relaxed">{useCase.desc}</p>
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{useCase.desc}</p>
                       </div>
                     ))}
                   </div>

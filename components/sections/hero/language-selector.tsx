@@ -21,14 +21,14 @@ export default function LanguageSelector({ currentLanguage, onLanguageChange }: 
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="gap-2 min-w-[200px] justify-between bg-white border-green-200 hover:bg-green-50 hover:border-green-300"
+          className="gap-2 min-w-[200px] justify-between bg-white border-green-200 hover:bg-green-50 hover:border-green-300 dark:bg-gray-900 dark:border-green-700 dark:hover:bg-green-900/30 dark:hover:border-green-600"
         >
           <div className="flex items-center gap-2">
-            <Globe className="h-4 w-4 text-green-600" />
+            <Globe className="h-4 w-4 text-green-600 dark:text-green-400" />
             <span className="text-lg">{currentLang.flag}</span>
-            <span className="font-medium">{currentLang.name}</span>
+            <span className="font-medium dark:text-white">{currentLang.name}</span>
           </div>
-          <ChevronDown className="h-4 w-4 text-green-600" />
+          <ChevronDown className="h-4 w-4 text-green-600 dark:text-green-400" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[250px] max-h-[300px] overflow-y-auto">
@@ -40,7 +40,7 @@ export default function LanguageSelector({ currentLanguage, onLanguageChange }: 
               setIsOpen(false)
             }}
             className={`flex items-center gap-3 cursor-pointer ${
-              currentLanguage === language.code ? "bg-green-50 text-green-700" : ""
+              currentLanguage === language.code ? "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-300" : ""
             }`}
           >
             <span className="text-lg">{language.flag}</span>

@@ -1,6 +1,8 @@
-import { ResizableHeader } from '@/components/layout/resizable-header';
-import HeroSection from '@/components/sections/hero/hero';
-import GlobalReachSection from '@/components/sections/global-reach';
+import { ResizableHeader } from "@/components/layout/resizable-header"
+import HeroSection from "@/components/sections/hero/hero"
+import FeaturesSection from "@/components/sections/features/features"
+import PricingSection from "@/components/sections/pricing/pricing"
+import GlobalReachSection from "@/components/sections/global-reach"
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -26,7 +28,7 @@ const websiteJsonLd = {
 
 
   return (
-    <div>
+    <div className="bg-gradient-to-br from-slate-50 via-white to-green-50/30 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30 min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -39,7 +41,9 @@ const websiteJsonLd = {
 
       <main className="min-h-screen">
         <HeroSection/>
+        <FeaturesSection/>
         <GlobalReachSection/>
+        <PricingSection/>
       </main>
 
     </div>
