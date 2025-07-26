@@ -1,5 +1,6 @@
-import { Header } from '@/components/layout/header';
+import { ResizableHeader } from '@/components/layout/resizable-header';
 import HeroSection from '@/components/sections/hero/hero';
+import GlobalReachSection from '@/components/sections/global-reach';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -34,10 +35,11 @@ const websiteJsonLd = {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <Header />
+      <ResizableHeader />
 
       <main className="min-h-screen">
         <HeroSection/>
+        <GlobalReachSection/>
       </main>
 
     </div>
