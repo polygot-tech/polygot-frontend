@@ -1,9 +1,28 @@
 "use client"
 
+import { useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Code, ArrowRight } from "lucide-react"
 import { useRouter } from "next/navigation"
+
+function SpotlightCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  // No need for mouse tracking for background anymore
+  return (
+    <motion.div
+      ref={ref}
+      className="relative rounded-2xl p-8 border border-green-300 overflow-hidden group transition-shadow duration-300 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-lg flex flex-col items-center text-center h-full cursor-pointer"
+      whileHover={{
+        boxShadow: "0 0 32px 8px #22c55e, 0 0 0px #22c55e",
+        filter: "drop-shadow(0 0 24pxrgb(156, 173, 162))",
+      }}
+      transition={{ type: "tween", duration: 0.18 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function FeaturesSection() {
   const router = useRouter()
@@ -53,26 +72,15 @@ export default function FeaturesSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {features.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
-                onClick={()=>router.push("/docs")}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="group relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/50 hover:border-green-300 dark:hover:border-green-600 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
-              >
-                <div className="inline-flex p-3 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <item.icon className="h-6 w-6" />
+              <SpotlightCard key={item.title}>
+                <div className="flex flex-col items-center text-center w-full h-full">
+                  <div className="inline-flex p-3 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mb-4">
+                    <item.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4 flex-1">{item.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">{item.description}</p>
-                <div className="flex items-center text-green-600 dark:text-green-400 font-medium group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors">
-                  Learn more
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </motion.div>
+              </SpotlightCard>
             ))}
           </div>
 
