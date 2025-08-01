@@ -26,7 +26,6 @@ import {
   Lock,
 } from "lucide-react"
 import Link from "next/link"
-import { Header } from "@/components/layout/header"
 import { toast } from "sonner"
 import { useCreatePayment } from "@/hooks/usePayments"
 
@@ -145,7 +144,6 @@ export default function PricingPage() {
 
   return (
     <>
-      <Header />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50/30">
         <main className="container mx-auto px-6 lg:px-8 py-20">
           {/* Hero Section */}

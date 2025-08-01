@@ -16,7 +16,6 @@ import {
   Terminal,
 } from "lucide-react"
 import { useState } from "react"
-import { Header } from "@/components/layout/header"
 
 export default function DocumentationPage() {
   const [activeSection, setActiveSection] = useState("overview")
@@ -62,7 +61,6 @@ export default function DocumentationPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30">
-      <Header />
       <div className="container mx-auto px-6 lg:px-8 py-8 md:py-12">
         <div className="flex flex-col md:flex-row gap-12">
           {/* Sidebar */}

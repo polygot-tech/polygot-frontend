@@ -1,9 +1,11 @@
-import { ResizableHeader } from "@/components/layout/resizable-header"
 import HeroSection from "@/components/sections/hero/hero"
-import FeaturesSection from "@/components/sections/features/features"
-import PricingSection from "@/components/sections/pricing/pricing"
-import GlobalReachSection from "@/components/sections/global-reach"
+import { Suspense, lazy } from 'react';
 import { Metadata } from 'next';
+
+// Lazy load heavy components
+const FeaturesSection = lazy(() => import("@/components/sections/features/features"));
+const PricingSection = lazy(() => import("@/components/sections/pricing/pricing"));
+const GlobalReachSection = lazy(() => import("@/components/sections/global-reach"));
 
 export const metadata: Metadata = {
   title: 'Polygot – The AI-Powered Translation & Localization',
@@ -28,7 +30,7 @@ const websiteJsonLd = {
 
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-white to-green-50/30 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30 min-h-screen">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -37,15 +39,17 @@ const websiteJsonLd = {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <ResizableHeader />
 
-      <main className="min-h-screen">
-        <HeroSection/>
+      <HeroSection/>
+      <Suspense fallback={<div className="h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30 animate-pulse" />}>
         <FeaturesSection/>
+      </Suspense>
+      <Suspense fallback={<div className="h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30 animate-pulse" />}>
         <GlobalReachSection/>
+      </Suspense>
+      <Suspense fallback={<div className="h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30 animate-pulse" />}>
         <PricingSection/>
-      </main>
-
-    </div>
+      </Suspense>
+    </>
   );
 }

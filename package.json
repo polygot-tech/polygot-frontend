@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack  --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@flags-sdk/hypertune": "^0.2.0",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.4.4",
     "@tailwindcss/postcss": "^4",
     "@tanstack/eslint-plugin-query": "^5.81.2",
     "@types/node": "^20",

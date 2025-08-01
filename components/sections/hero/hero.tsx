@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
+// Reduced hello words for better performance (from 49 to 20)
 const helloWords = [
   { text: "Hello", top: "15%", left: "10%" },
   { text: "Hola", top: "30%", left: "80%" },
@@ -28,42 +29,12 @@ const helloWords = [
   { text: "שלום", top: "60%", left: "75%" },
   { text: "नमस्ते", top: "20%", left: "40%" },
   { text: "สวัสดี", top: "80%", left: "5%" },
-  { text: "Selam", top: "35%", left: "10%" },
   { text: "Jambo", top: "45%", left: "5%" },
   { text: "Γεια σας", top: "25%", left: "85%" },
-  { text: "Здравей", top: "75%", left: "90%" },
   { text: "Hej", top: "55%", left: "25%" },
-  { text: "Hei", top: "40%", left: "70%" },
   { text: "Merhaba", top: "5%", left: "35%" },
-  { text: "Salam", top: "95%", left: "60%" },
   { text: "Ahoj", top: "12%", left: "65%" },
   { text: "Aloha", top: "88%", left: "35%" },
-  { text: "Sawubona", top: "5%", left: "65%" },
-  { text: "Helo", top: "18%", left: "75%" },
-  { text: "Dzień dobry", top: "62%", left: "5%" },
-  { text: "Bună", top: "38%", left: "92%" },
-  { text: "Здраво", top: "78%", left: "45%" },
-  { text: "Pozdrav", top: "28%", left: "45%" },
-  { text: "Tervehdys", top: "52%", left: "8%" },
-  { text: "Halló", top: "8%", left: "58%" },
-  { text: "Dia dhuit", top: "22%", left: "12%" },
-  { text: "Kaixo", top: "82%", left: "78%" },
-  { text: "Hola", top: "28%", left: "3%" },
-  { text: "Kumusta", top: "19%", left: "25%" },
-  { text: "Xin chào", top: "28%", left: "18%" },
-  { text: "ជំរាបសួរ", top: "72%", left: "38%" },
-  { text: "ສະບາຍດີ", top: "92%", left: "85%" },
-  { text: "မင်္ဂလာပါ", top: "14%", left: "48%" },
-  { text: "Здоровеньки булы", top: "44%", left: "75%" },
-  { text: "Saluton", top: "4%", left: "8%" },
-  { text: "Kia ora", top: "84%", left: "92%" },
-  { text: "Bula", top: "6%", left: "82%" },
-  { text: "Talofa", top: "76%", left: "28%" },
-  { text: "Kaltxì", top: "36%", left: "68%" },
-  { text: "Ave", top: "3%", left: "22%" },
-  { text: "Shalom aleichem", top: "86%", left: "15%" },
-  { text: "As-salamu alaykum", top: "16%", left: "88%" },
-  { text: "Vanakkam", top: "66%", left: "58%" },
 ];
 
 export default function HeroSection() {
@@ -121,23 +92,22 @@ export default function HeroSection() {
             key={i}
             aria-hidden="true"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
+            animate={{ opacity: 0.2 }}
             transition={{
               delay: 0.01 + i * 0.18,
               duration: 0.15, // for fade-in
               opacity: { duration: 0.12 }, // fast for hover in/out
-              textShadow: { duration: 0.12 }, // fast for hover in/out
             }}
             whileHover={{
-              opacity: 0.4,
+              opacity: 0.6,
               textShadow: "0 0 16px #22c55e, 0 0 32px #22c55e",
               }}
-            className="absolute select-none transition-all duration-300 text-2xl md:text-3xl font-bold hover:opacity-70 dark:text-emerald-200/60 text-emerald-700/60"
+            className="absolute select-none transition-all duration-300 text-2xl md:text-3xl font-bold hover:opacity-70 dark:text-emerald-200/80 text-emerald-600/70"
             style={{
               top,
               left,
-              color: "rgba(52, 211, 153, 0.4)", // #34d399 with 0.4 alpha
-              textShadow: "0 2px 8px rgba(52, 211, 153, 0.18)",
+              color: "rgba(52, 211, 153, 0.6)", // Increased from 0.4 to 0.6
+              textShadow: "0 2px 8px rgba(52, 211, 153, 0.3)", // Increased from 0.18 to 0.3
               zIndex: 1,
               pointerEvents: "auto",
               }}
@@ -192,10 +162,10 @@ export default function HeroSection() {
               {/* CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
                 {/* NPM Install Button */}
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="group flex">
                   <Button
                     size="lg"
-                    className="h-14 px-6 text-lg bg-gray-900 hover:bg-gray-800 text-green-400 font-mono rounded-xl transition-all duration-300 group relative overflow-hidden"
+                    className="h-14 px-6 text-lg bg-gray-900 hover:bg-gray-800 text-green-400 font-mono rounded-l-xl transition-all duration-300 relative overflow-hidden"
                     onClick={handleCopyClick}
                   >
                     <Code className="mr-3 h-5 w-5 text-green-400" />
@@ -211,18 +181,15 @@ export default function HeroSection() {
                         <Copy className="h-4 w-4 text-green-400" />
                       )}
                     </motion.div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="ml-2 h-8 w-8 text-green-400 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleNpmLinkClick()
-                      }}
-                      aria-label="Open npm package"
-                    >
-                      <LinkIcon className="h-4 w-4" />
-                    </Button>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-14 w-12 bg-gray-900 hover:bg-gray-700 text-green-400 rounded-r-xl rounded-l-none border-l border-gray-700 transition-all duration-300"
+                    onClick={handleNpmLinkClick}
+                    aria-label="Open npm package"
+                  >
+                    <LinkIcon className="h-4 w-4" />
                   </Button>
                 </motion.div>
 
