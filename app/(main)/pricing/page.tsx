@@ -219,10 +219,10 @@ const countries = [
   { code: "FM", name: "Micronesia" },
   { code: "MH", name: "Marshall Islands" },
 ]
-
+export type PlanTypes = "FREE" | "PRO" | "BUSINESS"
 export default function PricingPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: string } | null>(null)
+  const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: string, type: PlanTypes } | null>(null)
   const [formData, setFormData] = useState<PaymentFormData>({
     name: "",
     email: "",
@@ -233,8 +233,7 @@ export default function PricingPage() {
     zipcode: "",
   })
 
-  const token = "test_token" // Replace with your actual token retrieval logic
-  const { mutate: createPayment, isPending, data, error, isSuccess, isError } = useCreatePayment(token || "")
+  const { mutate: createPayment, isPending, data, error, isSuccess, isError } = useCreatePayment();
 
   // Handle payment response effects
   useEffect(() => {
@@ -275,8 +274,8 @@ export default function PricingPage() {
     )
   }
 
-  const handlePlanSelect = (planName: string, price: string) => {
-    setSelectedPlan({ name: planName, price })
+  const handlePlanSelect = (planName: string, price: string, type: PlanTypes) => {
+    setSelectedPlan({ name: planName, price, type })
     setIsDialogOpen(true)
   }
 
@@ -314,7 +313,7 @@ export default function PricingPage() {
     // Create payment
     createPayment({
       customer: formData,
-      type: selectedPlan?.name.toLowerCase() as string,
+      type: selectedPlan?.type as string,
     })
   }
 
@@ -432,7 +431,7 @@ export default function PricingPage() {
                   <div className="space-y-3">
                     <div className="flex items-baseline justify-center gap-2">
                       <span className="text-6xl font-black bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                        $19
+                        $29
                       </span>
                       <span className="text-gray-500 text-xl font-medium">/month</span>
                     </div>
@@ -460,7 +459,7 @@ export default function PricingPage() {
                   </div>
                   <div className="pt-6">
                     <Button
-                      onClick={() => handlePlanSelect("Pro", "$19")}
+                      onClick={() => handlePlanSelect("Pro", "$29", "PRO")}
                       className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white py-6 text-lg font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 rounded-xl"
                     >
                       Get Started
@@ -510,7 +509,7 @@ export default function PricingPage() {
                   </div>
                   <div className="pt-6">
                     <Button
-                      onClick={() => handlePlanSelect("Business", "$99")}
+                      onClick={() => handlePlanSelect("Business", "$99", "BUSINESS")}
                       className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-xl"
                     >
                       Get Started
@@ -772,7 +771,7 @@ export default function PricingPage() {
               )}
               <Button
                 onClick={handleContinueToPayment}
-                disabled={isPending || !token}
+                disabled={isPending}
                 className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 rounded-xl mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Lock className="mr-3 h-5 w-5" />

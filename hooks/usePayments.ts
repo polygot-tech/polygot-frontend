@@ -1,5 +1,5 @@
-import { apiClient } from "@/lib/api"
-import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
+import { apiClient } from "@/lib/api";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface Customer {
   name: string;
@@ -11,26 +11,23 @@ interface Customer {
   zipcode: string;
 }
 
-export const useCreatePayment = (token: string) => {
+export const useCreatePayment = () => {
   return useMutation({
-    mutationFn: async ({customer,type}:{
-        customer: Customer,
-        type:string
+    mutationFn: async ({
+      customer,
+      type,
+    }: {
+      customer: Customer;
+      type: string;
     }) => {
-      const res = await apiClient.post(
-        "/api/v1/payments",
-        { customer: customer, type:type },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+      const res = await apiClient.post("/api/v1/payments", {
+        customer: customer,
+        type: type,
+      });
       return res.data; // should include { paymentLink: string }
-    }
+    },
   });
 };
-
 
 export const usePaymentStatus = (paymentId: string | null, token: string) => {
   return useQuery({
@@ -52,5 +49,3 @@ export const usePaymentStatus = (paymentId: string | null, token: string) => {
     enabled: !!paymentId,
   });
 };
-
-
