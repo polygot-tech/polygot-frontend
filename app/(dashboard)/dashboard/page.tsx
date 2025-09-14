@@ -20,7 +20,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Plus, Settings, Server, Code, Activity, ArrowRight, Zap, AlertCircle, RefreshCw } from 'lucide-react'
 import Link from "next/link"
-import { Header } from "@/components/layout/header"
 import { useApps } from "@/hooks/useApps"
 import { useAuthStore } from "@/store/auth.store"
 import { useRouter } from "next/navigation"
@@ -92,7 +91,6 @@ export default function ApplicationsDashboard() {
 
   const LoadingSkeleton = () => (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30">
-      <Header />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <div className="mb-12">
           <Skeleton className="h-10 w-64 mb-4" />
@@ -138,7 +136,6 @@ export default function ApplicationsDashboard() {
   if (appsQuery.error) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30">
-        <Header />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
           <div className="flex items-center justify-center min-h-[70vh]">
             <Card className="w-full max-w-2xl text-center border border-red-200 shadow-xl bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden">
@@ -202,8 +199,6 @@ export default function ApplicationsDashboard() {
           }}
         />
       </div>
-
-      <Header />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-12">
         {/* Show creation error if any */}

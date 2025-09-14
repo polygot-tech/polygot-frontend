@@ -12,7 +12,6 @@ import {
   BarChart3,
   Sparkles,
 } from "lucide-react"
-import { Header } from "@/components/layout/header"
 
 export default function FutureFeaturesPage() {
 
@@ -133,9 +132,6 @@ export default function FutureFeaturesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50/30">
-      {/* Navigation */}
-      <Header/>
-
       {/* Hero Section */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

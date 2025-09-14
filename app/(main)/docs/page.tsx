@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react/no-unescaped-entities */
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Copy,
   CheckCircle,
@@ -14,23 +14,23 @@ import {
   Shield,
   FileJson,
   Terminal,
-} from "lucide-react"
-import { useState } from "react"
-import { Header } from "@/components/layout/header"
+} from "lucide-react";
+import { useState } from "react";
+import { Header } from "@/components/layout/header";
 
 export default function DocumentationPage() {
-  const [activeSection, setActiveSection] = useState("overview")
-  const [copiedCode, setCopiedCode] = useState("")
+  const [activeSection, setActiveSection] = useState("overview");
+  const [copiedCode, setCopiedCode] = useState("");
 
   const copyToClipboard = async (code: string, id: string) => {
     try {
-      await navigator.clipboard.writeText(code)
-      setCopiedCode(id)
-      setTimeout(() => setCopiedCode(""), 2000)
+      await navigator.clipboard.writeText(code);
+      setCopiedCode(id);
+      setTimeout(() => setCopiedCode(""), 2000);
     } catch (error) {
-      console.error("Failed to copy:", error)
+      console.error("Failed to copy:", error);
     }
-  }
+  };
 
   const CopyButton = ({ code, id }: { code: string; id: string }) => (
     <Button
@@ -45,7 +45,7 @@ export default function DocumentationPage() {
         <Copy className="w-4 h-4 text-gray-600" />
       )}
     </Button>
-  )
+  );
 
   const sidebarItems = [
     { id: "overview", label: "Overview", icon: FileText },
@@ -55,7 +55,7 @@ export default function DocumentationPage() {
     { id: "component", label: "Polygot", icon: Component },
     { id: "local", label: "PolygotLocal", icon: FileJson },
     { id: "nopolygot", label: "NoPolygot", icon: Shield },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50">
@@ -67,7 +67,7 @@ export default function DocumentationPage() {
             <div className="sticky top-20 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-4">
               <nav className="space-y-1">
                 {sidebarItems.map((item) => {
-                  const Icon = item.icon
+                  const Icon = item.icon;
                   return (
                     <button
                       key={item.id}
@@ -81,7 +81,7 @@ export default function DocumentationPage() {
                       <Icon className="w-4 h-4 flex-shrink-0" />
                       <span className="truncate">{item.label}</span>
                     </button>
-                  )
+                  );
                 })}
               </nav>
             </div>
@@ -95,21 +95,25 @@ export default function DocumentationPage() {
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
                     Polygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Documentation
                     </span>
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    React translation library with intelligent context management and automatic content translation.
+                    React translation library with intelligent context
+                    management and automatic content translation.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Installation</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Installation
+                  </h2>
                   <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-4 sm:p-6 text-white overflow-x-auto">
                       <code className="text-sm sm:text-base">
-                        <span className="text-cyan-400">npm</span> <span className="text-cyan-400">install</span>{" "}
+                        <span className="text-cyan-400">npm</span>{" "}
+                        <span className="text-cyan-400">install</span>{" "}
                         <span className="text-yellow-300">polygot</span>
                       </code>
                     </pre>
@@ -118,10 +122,13 @@ export default function DocumentationPage() {
                 </section>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Quick Start Example</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Quick Start Example
+                  </h2>
                   <p className="text-gray-600 leading-relaxed">
-                    This example demonstrates the updated API with enhanced language options, translation statistics,
-                    and improved context management.
+                    This example demonstrates the updated API with enhanced
+                    language options, translation statistics, and improved
+                    context management.
                   </p>
                   <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-4 sm:p-6 text-white overflow-x-auto">
@@ -129,19 +136,21 @@ export default function DocumentationPage() {
                         <span className="text-pink-400">import</span> {"{"}{" "}
                         <span className="text-green-400">useState</span>,{" "}
                         <span className="text-green-400">useEffect</span> {"}"}{" "}
-                        <span className="text-pink-400">from</span> <span className="text-yellow-300">'react'</span>;
-                        {"\n"}
+                        <span className="text-pink-400">from</span>{" "}
+                        <span className="text-yellow-300">'react'</span>;{"\n"}
                         <span className="text-pink-400">import</span> {"{"}{" "}
                         <span className="text-green-400">PolygotProvider</span>,{" "}
                         <span className="text-green-400">Polygot</span>,{" "}
                         <span className="text-green-400">NoPolygot</span>,{" "}
                         <span className="text-green-400">usePolygot</span> {"}"}{" "}
-                        <span className="text-pink-400">from</span> <span className="text-yellow-300">'polygot'</span>;
+                        <span className="text-pink-400">from</span>{" "}
+                        <span className="text-yellow-300">'polygot'</span>;
                         {"\n\n"}
-                        <span className="text-blue-400">function</span> <span className="text-green-400">App</span>(){" "}
-                        {"{"}
+                        <span className="text-blue-400">function</span>{" "}
+                        <span className="text-green-400">App</span>() {"{"}
                         {"\n  "}
-                        <span className="text-pink-400">return</span> ({"\n    "}
+                        <span className="text-pink-400">return</span> (
+                        {"\n    "}
                         <span className="text-gray-400">{"<"}</span>
                         <span className="text-green-400">PolygotProvider</span>
                         {"\n      "}
@@ -168,7 +177,8 @@ export default function DocumentationPage() {
                         <span className="text-gray-400">{">"}</span>
                         {"\n      "}
                         <span className="text-gray-400">{"<"}</span>
-                        <span className="text-green-400">Dashboard</span> <span className="text-gray-400">{"/>"}</span>
+                        <span className="text-green-400">Dashboard</span>{" "}
+                        <span className="text-gray-400">{"/>"}</span>
                         {"\n    "}
                         <span className="text-gray-400">{"</"}</span>
                         <span className="text-green-400">PolygotProvider</span>
@@ -178,32 +188,41 @@ export default function DocumentationPage() {
                         {"\n"}
                         {"}"};{"\n\n"}
                         <span className="text-blue-400">function</span>{" "}
-                        <span className="text-green-400">Dashboard</span>() {"{"}
+                        <span className="text-green-400">Dashboard</span>(){" "}
+                        {"{"}
                         {"\n  "}
                         <span className="text-blue-400">const</span> {"{"}{" "}
                         <span className="text-green-400">setLanguage</span>,{" "}
                         <span className="text-green-400">language</span>,{" "}
                         <span className="text-green-400">currentOptions</span>,{" "}
-                        <span className="text-green-400">stats</span> {"}"} <span className="text-gray-400">=</span>{" "}
+                        <span className="text-green-400">stats</span> {"}"}{" "}
+                        <span className="text-gray-400">=</span>{" "}
                         <span className="text-green-400">usePolygot</span>();
                         {"\n  "}
                         <span className="text-blue-400">const</span> {"["}
                         <span className="text-green-400">apiData</span>,{" "}
                         <span className="text-green-400">setApiData</span>
-                        {"]"} <span className="text-gray-400">=</span> <span className="text-green-400">useState</span>(
+                        {"]"} <span className="text-gray-400">=</span>{" "}
+                        <span className="text-green-400">useState</span>(
                         <span className="text-purple-400">null</span>);
                         {"\n\n  "}
                         <span className="text-blue-400">const</span>{" "}
-                        <span className="text-green-400">handleLanguageChange</span>{" "}
+                        <span className="text-green-400">
+                          handleLanguageChange
+                        </span>{" "}
                         <span className="text-gray-400">=</span> () =&gt; {"{"}
                         {"\n    "}
-                        <span className="text-green-400">setLanguage</span>({"{"}
+                        <span className="text-green-400">setLanguage</span>(
+                        {"{"}
                         {"\n      "}
                         <span className="text-yellow-300">language</span>:{" "}
-                        <span className="text-yellow-300">'French'</span>,{"\n      "}
-                        <span className="text-yellow-300">tone</span>: <span className="text-yellow-300">'casual'</span>
-                        ,{"\n      "}
-                        <span className="text-yellow-300">region</span>: <span className="text-yellow-300">'CA'</span>,
+                        <span className="text-yellow-300">'French'</span>,
+                        {"\n      "}
+                        <span className="text-yellow-300">tone</span>:{" "}
+                        <span className="text-yellow-300">'casual'</span>,
+                        {"\n      "}
+                        <span className="text-yellow-300">region</span>:{" "}
+                        <span className="text-yellow-300">'CA'</span>,
                         {"\n      "}
                         <span className="text-yellow-300">context</span>:{" "}
                         <span className="text-yellow-300">'business'</span>
@@ -211,9 +230,11 @@ export default function DocumentationPage() {
                         {"}"});
                         {"\n  "}
                         {"}"};{"\n\n  "}
-                        <span className="text-pink-400">return</span> ({"\n    "}
+                        <span className="text-pink-400">return</span> (
+                        {"\n    "}
                         <span className="text-gray-400">{"<"}</span>
-                        <span className="text-green-400">div</span> <span className="text-cyan-400">className</span>
+                        <span className="text-green-400">div</span>{" "}
+                        <span className="text-cyan-400">className</span>
                         <span className="text-gray-400">=</span>
                         <span className="text-yellow-300">"p-6"</span>
                         <span className="text-gray-400">{">"}</span>
@@ -230,14 +251,16 @@ export default function DocumentationPage() {
                         {"\n        "}
                         <span className="text-gray-400">{"<"}</span>
                         <span className="text-green-400">h1</span>
-                        <span className="text-gray-400">{">"}</span>Welcome to Dashboard
+                        <span className="text-gray-400">{">"}</span>Welcome to
+                        Dashboard
                         <span className="text-gray-400">{"</"}</span>
                         <span className="text-green-400">h1</span>
                         <span className="text-gray-400">{">"}</span>
                         {"\n        "}
                         <span className="text-gray-400">{"<"}</span>
                         <span className="text-green-400">p</span>
-                        <span className="text-gray-400">{">"}</span>Current language: {"{"}
+                        <span className="text-gray-400">{">"}</span>Current
+                        language: {"{"}
                         <span className="text-green-400">language</span>
                         {"}"}
                         <span className="text-gray-400">{"</"}</span>
@@ -255,7 +278,8 @@ export default function DocumentationPage() {
                         <span className="text-gray-400">{">"}</span>
                         {"\n        "}
                         <span className="text-gray-400">{"<"}</span>
-                        <span className="text-green-400">button</span> <span className="text-cyan-400">onClick</span>
+                        <span className="text-green-400">button</span>{" "}
+                        <span className="text-cyan-400">onClick</span>
                         <span className="text-gray-400">=</span>
                         <span className="text-green-400">
                           {"{"}handleLanguageChange{"}"}
@@ -282,7 +306,8 @@ export default function DocumentationPage() {
                         {"\n          "}
                         <span className="text-gray-400">{"<"}</span>
                         <span className="text-green-400">h3</span>
-                        <span className="text-gray-400">{">"}</span>Translation Stats
+                        <span className="text-gray-400">{">"}</span>Translation
+                        Stats
                         <span className="text-gray-400">{"</"}</span>
                         <span className="text-green-400">h3</span>
                         <span className="text-gray-400">{">"}</span>
@@ -291,7 +316,9 @@ export default function DocumentationPage() {
                         <span className="text-green-400">p</span>
                         <span className="text-gray-400">{">"}</span>Total: {"{"}
                         <span className="text-green-400">stats</span>.
-                        <span className="text-green-400">totalTranslations</span>
+                        <span className="text-green-400">
+                          totalTranslations
+                        </span>
                         {"}"}
                         <span className="text-gray-400">{"</"}</span>
                         <span className="text-green-400">p</span>
@@ -299,8 +326,10 @@ export default function DocumentationPage() {
                         {"\n          "}
                         <span className="text-gray-400">{"<"}</span>
                         <span className="text-green-400">p</span>
-                        <span className="text-gray-400">{">"}</span>Cache Hits: {"{"}
-                        <span className="text-green-400">stats</span>.<span className="text-green-400">cacheHits</span>
+                        <span className="text-gray-400">{">"}</span>Cache Hits:{" "}
+                        {"{"}
+                        <span className="text-green-400">stats</span>.
+                        <span className="text-green-400">cacheHits</span>
                         {"}"}
                         <span className="text-gray-400">{"</"}</span>
                         <span className="text-green-400">p</span>
@@ -388,38 +417,53 @@ function Dashboard() {
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
                     Polygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       CLI Tool
                     </span>
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    Generate static translation files for SEO optimization and improved performance.
+                    Generate static translation files for SEO optimization and
+                    improved performance.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Usage</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Usage
+                  </h2>
                   <p className="text-gray-600 leading-relaxed">
-                    Use the Polygot CLI to extract translatable strings from your React components and generate
-                    language-specific JSON files. This is ideal for server-side rendering (SSR) and SEO, as search
-                    engines can crawl pre-translated content.
+                    Use the Polygot CLI to extract translatable strings from
+                    your React components and generate language-specific JSON
+                    files. This is ideal for server-side rendering (SSR) and
+                    SEO, as search engines can crawl pre-translated content.
                   </p>
                   <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-4 sm:p-6 text-white overflow-x-auto">
                       <code className="text-sm sm:text-base">
-                        <span className="text-cyan-400">npx</span> <span className="text-yellow-300">polygot</span>{" "}
-                        <span className="text-green-400">filename.[tsx,jsx]</span>{" "}
-                        <span className="text-purple-400">language1,language2,...</span>
+                        <span className="text-cyan-400">npx</span>{" "}
+                        <span className="text-yellow-300">polygot</span>{" "}
+                        <span className="text-green-400">
+                          filename.[tsx,jsx]
+                        </span>{" "}
+                        <span className="text-purple-400">
+                          language1,language2,...
+                        </span>
                       </code>
                     </pre>
-                    <CopyButton code="npx polygot filename.[tsx,jsx] language1,language2,..." id="cli-command" />
+                    <CopyButton
+                      code="npx polygot filename.[tsx,jsx] language1,language2,..."
+                      id="cli-command"
+                    />
                   </div>
                 </section>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Output Structure</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Output Structure
+                  </h2>
                   <p className="text-gray-600 leading-relaxed">
-                    Translation files will be generated in `locales/(language_code).json`.
+                    Translation files will be generated in
+                    `locales/(language_code).json`.
                   </p>
                   <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-4 sm:p-6 text-white overflow-x-auto">
@@ -432,15 +476,19 @@ function Dashboard() {
                         {"\n"}
                         <span className="text-gray-400">└── fr.json</span>
                         {"\n"}
-                        <span className="text-gray-500">// Example content of locales/es.json</span>
+                        <span className="text-gray-500">
+                          // Example content of locales/es.json
+                        </span>
                         {"\n"}
                         <span className="text-gray-400">{"{"}</span>
                         {"\n  "}
                         <span className="text-yellow-300">"Hello World"</span>
-                        <span className="text-gray-400">:</span> <span className="text-yellow-300">"Hola Mundo"</span>,
+                        <span className="text-gray-400">:</span>{" "}
+                        <span className="text-yellow-300">"Hola Mundo"</span>,
                         {"\n  "}
                         <span className="text-yellow-300">"Welcome"</span>
-                        <span className="text-gray-400">:</span> <span className="text-yellow-300">"Bienvenido"</span>
+                        <span className="text-gray-400">:</span>{" "}
+                        <span className="text-yellow-300">"Bienvenido"</span>
                         {"\n"}
                         <span className="text-gray-400">{"}"}</span>
                       </code>
@@ -469,26 +517,36 @@ function Dashboard() {
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
                     PolygotProvider
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    Enhanced context provider that manages translation state with advanced options, batching, and
-                    statistics.
+                    Enhanced context provider that manages translation state
+                    with advanced options, batching, and statistics.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Props
+                  </h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg overflow-x-auto">
                     <table className="w-full min-w-[600px]">
                       <thead className="bg-emerald-50/50">
                         <tr>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Name</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Type</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Default</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Description</th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Name
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Type
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Default
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Description
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -569,9 +627,15 @@ function Dashboard() {
                                 )}
                               </div>
                             </td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">{row.type}</td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">{row.default}</td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">{row.desc}</td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">
+                              {row.type}
+                            </td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">
+                              {row.default}
+                            </td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">
+                              {row.desc}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -587,24 +651,33 @@ function Dashboard() {
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
                     usePolygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Hook
                     </span>
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    Enhanced hook providing comprehensive translation functions, statistics, and utility methods.
+                    Enhanced hook providing comprehensive translation functions,
+                    statistics, and utility methods.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Returns</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Returns
+                  </h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg overflow-x-auto">
                     <table className="w-full min-w-[600px]">
                       <thead className="bg-emerald-50/50">
                         <tr>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Property</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Type</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Description</th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Property
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Type
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Description
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -619,17 +692,41 @@ function Dashboard() {
                             type: "<T extends SupportedLanguage>(options: LanguageChangeOptions<T>) => void",
                             desc: "Type-safe language setter with comprehensive options",
                           },
-                          { prop: "language", type: "SupportedLanguage", desc: "Current target language" },
-                          { prop: "sourceLanguage", type: "SupportedLanguage | undefined", desc: "Source language" },
+                          {
+                            prop: "language",
+                            type: "SupportedLanguage",
+                            desc: "Current target language",
+                          },
+                          {
+                            prop: "sourceLanguage",
+                            type: "SupportedLanguage | undefined",
+                            desc: "Source language",
+                          },
                           {
                             prop: "currentOptions",
                             type: "{ tone: TranslationTone; region?: Region; context?: string }",
                             desc: "Current translation options",
                           },
-                          { prop: "isLoading", type: "boolean", desc: "Translation loading state" },
-                          { prop: "error", type: "string | null", desc: "Translation error message" },
-                          { prop: "inflightRequests", type: "Set<string>", desc: "Currently processing requests" },
-                          { prop: "clearTranslations", type: "() => void", desc: "Clear all cached translations" },
+                          {
+                            prop: "isLoading",
+                            type: "boolean",
+                            desc: "Translation loading state",
+                          },
+                          {
+                            prop: "error",
+                            type: "string | null",
+                            desc: "Translation error message",
+                          },
+                          {
+                            prop: "inflightRequests",
+                            type: "Set<string>",
+                            desc: "Currently processing requests",
+                          },
+                          {
+                            prop: "clearTranslations",
+                            type: "() => void",
+                            desc: "Clear all cached translations",
+                          },
                           {
                             prop: "getTranslationMetadata",
                             type: "(text: string) => TranslationMetadata | null",
@@ -680,8 +777,12 @@ function Dashboard() {
                                 {row.prop}
                               </code>
                             </td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600 break-all">{row.type}</td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">{row.desc}</td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600 break-all">
+                              {row.type}
+                            </td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">
+                              {row.desc}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -697,26 +798,36 @@ function Dashboard() {
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
                     Polygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    Enhanced component with intelligent translation detection, retry logic, and performance
-                    optimizations.
+                    Enhanced component with intelligent translation detection,
+                    retry logic, and performance optimizations.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Props
+                  </h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg overflow-x-auto">
                     <table className="w-full min-w-[600px]">
                       <thead className="bg-emerald-50/50">
                         <tr>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Name</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Type</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Default</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Description</th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Name
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Type
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Default
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Description
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -766,9 +877,15 @@ function Dashboard() {
                                 )}
                               </div>
                             </td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">{row.type}</td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">{row.default}</td>
-                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">{row.desc}</td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">
+                              {row.type}
+                            </td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">
+                              {row.default}
+                            </td>
+                            <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">
+                              {row.desc}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -784,25 +901,35 @@ function Dashboard() {
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
                     PolygotLocal
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    Component that translates its children based on a provided JSON object instead of API calls. Perfect
-                    for offline translations or when you have pre-defined translation mappings.
+                    Component that translates its children based on a provided
+                    JSON object instead of API calls. Perfect for offline
+                    translations or when you have pre-defined translation
+                    mappings.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Props
+                  </h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg overflow-x-auto">
                     <table className="w-full min-w-[600px]">
                       <thead className="bg-emerald-50/50">
                         <tr>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Name</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Type</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Description</th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Name
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Type
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Description
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -812,12 +939,17 @@ function Dashboard() {
                               <code className="text-xs sm:text-sm font-mono bg-emerald-100 border border-emerald-200 text-emerald-700 px-1.5 py-0.5 rounded">
                                 children
                               </code>
-                              <Badge variant="destructive" className="text-xs bg-red-100 text-red-700 border-red-200">
+                              <Badge
+                                variant="destructive"
+                                className="text-xs bg-red-100 text-red-700 border-red-200"
+                              >
                                 required
                               </Badge>
                             </div>
                           </td>
-                          <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">ReactNode</td>
+                          <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">
+                            ReactNode
+                          </td>
                           <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">
                             The React nodes to be translated
                           </td>
@@ -828,7 +960,10 @@ function Dashboard() {
                               <code className="text-xs sm:text-sm font-mono bg-emerald-100 border border-emerald-200 text-emerald-700 px-1.5 py-0.5 rounded">
                                 translationJson
                               </code>
-                              <Badge variant="destructive" className="text-xs bg-red-100 text-red-700 border-red-200">
+                              <Badge
+                                variant="destructive"
+                                className="text-xs bg-red-100 text-red-700 border-red-200"
+                              >
                                 required
                               </Badge>
                             </div>
@@ -846,11 +981,14 @@ function Dashboard() {
                 </section>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Translation JSON Structure</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Translation JSON Structure
+                  </h2>
                   <div className="space-y-4">
-                    <p className="text-gray-600 leading-relaxed">
-                      The translation JSON should follow this structure where each language code maps to an object
-                      containing original text as keys and translated text as values:
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      The translation JSON should follow this structure where
+                      each language code maps to an object containing original
+                      text as keys and translated text as values:
                     </p>
                     <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
                       <pre className="p-4 sm:p-6 text-white overflow-x-auto">
@@ -858,35 +996,43 @@ function Dashboard() {
                           <span className="text-gray-400">{"{"}</span>
                           {"\n  "}
                           <span className="text-yellow-300">"es"</span>
-                          <span className="text-gray-400">:</span> <span className="text-gray-400">{"{"}</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-gray-400">{"{"}</span>
                           {"\n    "}
                           <span className="text-yellow-300">"Hello"</span>
-                          <span className="text-gray-400">:</span> <span className="text-yellow-300">"Hola"</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-yellow-300">"Hola"</span>
                           <span className="text-gray-400">,</span>
                           {"\n    "}
                           <span className="text-yellow-300">"Welcome"</span>
-                          <span className="text-gray-400">:</span> <span className="text-yellow-300">"Bienvenido"</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-yellow-300">"Bienvenido"</span>
                           <span className="text-gray-400">,</span>
                           {"\n    "}
                           <span className="text-yellow-300">"Thank you"</span>
-                          <span className="text-gray-400">:</span> <span className="text-yellow-300">"Gracias"</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-yellow-300">"Gracias"</span>
                           {"\n  "}
                           <span className="text-gray-400">{"}"}</span>
                           <span className="text-gray-400">,</span>
                           {"\n  "}
                           <span className="text-yellow-300">"fr"</span>
-                          <span className="text-gray-400">:</span> <span className="text-gray-400">{"{"}</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-gray-400">{"{"}</span>
                           {"\n    "}
                           <span className="text-yellow-300">"Hello"</span>
-                          <span className="text-gray-400">:</span> <span className="text-yellow-300">"Bonjour"</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-yellow-300">"Bonjour"</span>
                           <span className="text-gray-400">,</span>
                           {"\n    "}
                           <span className="text-yellow-300">"Welcome"</span>
-                          <span className="text-gray-400">:</span> <span className="text-yellow-300">"Bienvenue"</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-yellow-300">"Bienvenue"</span>
                           <span className="text-gray-400">,</span>
                           {"\n    "}
                           <span className="text-yellow-300">"Thank you"</span>
-                          <span className="text-gray-400">:</span> <span className="text-yellow-300">"Merci"</span>
+                          <span className="text-gray-400">:</span>{" "}
+                          <span className="text-yellow-300">"Merci"</span>
                           {"\n  "}
                           <span className="text-gray-400">{"}"}</span>
                           {"\n"}
@@ -902,79 +1048,116 @@ function Dashboard() {
                 </section>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Example</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Example
+                  </h2>
                   <div className="relative group bg-gray-900 rounded-xl shadow-lg overflow-hidden">
                     <pre className="p-4 sm:p-6 text-white overflow-x-auto">
                       <code className="text-xs sm:text-sm lg:text-base">
-                        <span className="text-pink-400">import</span> <span className="text-green-400">React</span>{" "}
-                        <span className="text-pink-400">from</span> <span className="text-yellow-300">'react'</span>
+                        <span className="text-pink-400">import</span>{" "}
+                        <span className="text-green-400">React</span>{" "}
+                        <span className="text-pink-400">from</span>{" "}
+                        <span className="text-yellow-300">'react'</span>
                         {"\n"}
                         <span className="text-pink-400">import</span> {"{"}{" "}
-                        <span className="text-green-400">PolygotLocal</span> {"}"}{" "}
-                        <span className="text-pink-400">from</span> <span className="text-yellow-300">'polygot'</span>
+                        <span className="text-green-400">PolygotLocal</span>{" "}
+                        {"}"} <span className="text-pink-400">from</span>{" "}
+                        <span className="text-yellow-300">'polygot'</span>
                         {"\n\n"}
-                        <span className="text-gray-500">// Translation data</span>
+                        <span className="text-gray-500">
+                          // Translation data
+                        </span>
                         {"\n"}
                         <span className="text-pink-400">const</span>{" "}
-                        <span className="text-green-400">translations</span> <span className="text-gray-400">=</span>{" "}
+                        <span className="text-green-400">translations</span>{" "}
+                        <span className="text-gray-400">=</span>{" "}
                         <span className="text-gray-400">{"{"}</span>
                         {"\n  "}
                         <span className="text-yellow-300">"es"</span>
-                        <span className="text-gray-400">:</span> <span className="text-gray-400">{"{"}</span>
-                        {"\n    "}
-                        <span className="text-yellow-300">"Welcome to our store"</span>
                         <span className="text-gray-400">:</span>{" "}
-                        <span className="text-yellow-300">"Bienvenido a nuestra tienda"</span>
+                        <span className="text-gray-400">{"{"}</span>
+                        {"\n    "}
+                        <span className="text-yellow-300">
+                          "Welcome to our store"
+                        </span>
+                        <span className="text-gray-400">:</span>{" "}
+                        <span className="text-yellow-300">
+                          "Bienvenido a nuestra tienda"
+                        </span>
                         <span className="text-gray-400">,</span>
                         {"\n    "}
-                        <span className="text-yellow-300">"Browse our products"</span>
+                        <span className="text-yellow-300">
+                          "Browse our products"
+                        </span>
                         <span className="text-gray-400">:</span>{" "}
-                        <span className="text-yellow-300">"Explora nuestros productos"</span>
+                        <span className="text-yellow-300">
+                          "Explora nuestros productos"
+                        </span>
                         <span className="text-gray-400">,</span>
                         {"\n    "}
                         <span className="text-yellow-300">"Add to Cart"</span>
                         <span className="text-gray-400">:</span>{" "}
-                        <span className="text-yellow-300">"Agregar al Carrito"</span>
+                        <span className="text-yellow-300">
+                          "Agregar al Carrito"
+                        </span>
                         <span className="text-gray-400">,</span>
                         {"\n    "}
                         <span className="text-yellow-300">"Contact Us"</span>
-                        <span className="text-gray-400">:</span> <span className="text-yellow-300">"Contáctanos"</span>
+                        <span className="text-gray-400">:</span>{" "}
+                        <span className="text-yellow-300">"Contáctanos"</span>
                         {"\n  "}
                         <span className="text-gray-400">{"}"}</span>
                         <span className="text-gray-400">,</span>
                         {"\n  "}
                         <span className="text-yellow-300">"fr"</span>
-                        <span className="text-gray-400">:</span> <span className="text-gray-400">{"{"}</span>
-                        {"\n    "}
-                        <span className="text-yellow-300">"Welcome to our store"</span>
                         <span className="text-gray-400">:</span>{" "}
-                        <span className="text-yellow-300">"Bienvenue dans notre magasin"</span>
+                        <span className="text-gray-400">{"{"}</span>
+                        {"\n    "}
+                        <span className="text-yellow-300">
+                          "Welcome to our store"
+                        </span>
+                        <span className="text-gray-400">:</span>{" "}
+                        <span className="text-yellow-300">
+                          "Bienvenue dans notre magasin"
+                        </span>
                         <span className="text-gray-400">,</span>
                         {"\n    "}
-                        <span className="text-yellow-300">"Browse our products"</span>
+                        <span className="text-yellow-300">
+                          "Browse our products"
+                        </span>
                         <span className="text-gray-400">:</span>{" "}
-                        <span className="text-yellow-300">"Parcourir nos produits"</span>
+                        <span className="text-yellow-300">
+                          "Parcourir nos produits"
+                        </span>
                         <span className="text-gray-400">,</span>
                         {"\n    "}
                         <span className="text-yellow-300">"Add to Cart"</span>
                         <span className="text-gray-400">:</span>{" "}
-                        <span className="text-yellow-300">"Ajouter au Panier"</span>
+                        <span className="text-yellow-300">
+                          "Ajouter au Panier"
+                        </span>
                         <span className="text-gray-400">,</span>
                         {"\n    "}
                         <span className="text-yellow-300">"Contact Us"</span>
                         <span className="text-gray-400">:</span>{" "}
-                        <span className="text-yellow-300">"Nous Contacter"</span>
+                        <span className="text-yellow-300">
+                          "Nous Contacter"
+                        </span>
                         {"\n  "}
                         <span className="text-gray-400">{"}"}</span>
                         {"\n"}
                         <span className="text-gray-400">{"}"}</span>
                         {"\n\n"}
                         <span className="text-blue-400">function</span>{" "}
-                        <span className="text-green-400">ProductPage</span>() {"{"}
+                        <span className="text-green-400">ProductPage</span>(){" "}
+                        {"{"}
                         {"\n  "}
-                        <span className="text-pink-400">return</span> ({"\n    "}
+                        <span className="text-pink-400">return</span> (
+                        {"\n    "}
                         <span className="text-gray-400">{"<"}</span>
-                        <span className="text-green-400">PolygotLocal</span>{" "}
+                        <span className="text-green-400">
+                          PolygotLocal
+                        </span>{" "}
                         <span className="text-cyan-400">translationJson</span>
                         <span className="text-gray-400">=</span>
                         <span className="text-gray-400">{"{"}</span>
@@ -983,7 +1166,8 @@ function Dashboard() {
                         <span className="text-gray-400">{">"}</span>
                         {"\n      "}
                         <span className="text-gray-400">{"<"}</span>
-                        <span className="text-green-400">div</span> <span className="text-cyan-400">className</span>
+                        <span className="text-green-400">div</span>{" "}
+                        <span className="text-cyan-400">className</span>
                         <span className="text-gray-400">=</span>
                         <span className="text-yellow-300">"product-page"</span>
                         <span className="text-gray-400">{">"}</span>
@@ -994,15 +1178,15 @@ function Dashboard() {
                         {"\n          "}
                         <span className="text-gray-400">{"<"}</span>
                         <span className="text-green-400">h1</span>
-                        <span className="text-gray-400">{">"}</span>Welcome to our store{" "}
-                        <span className="text-gray-400">{"</"}</span>
+                        <span className="text-gray-400">{">"}</span>Welcome to
+                        our store <span className="text-gray-400">{"</"}</span>
                         <span className="text-green-400">h1</span>
                         <span className="text-gray-400">{">"}</span>
                         {"\n          "}
                         <span className="text-gray-400">{"<"}</span>
                         <span className="text-green-400">p</span>
-                        <span className="text-gray-400">{">"}</span>Browse our products{" "}
-                        <span className="text-gray-400">{"</"}</span>
+                        <span className="text-gray-400">{">"}</span>Browse our
+                        products <span className="text-gray-400">{"</"}</span>
                         <span className="text-green-400">p</span>
                         <span className="text-gray-400">{">"}</span>
                         {"\n        "}
@@ -1015,7 +1199,8 @@ function Dashboard() {
                         <span className="text-gray-400">{">"}</span>
                         {"\n          "}
                         <span className="text-gray-400">{"<"}</span>
-                        <span className="text-green-400">button</span> <span className="text-cyan-400">className</span>
+                        <span className="text-green-400">button</span>{" "}
+                        <span className="text-cyan-400">className</span>
                         <span className="text-gray-400">=</span>
                         <span className="text-yellow-300">"btn-primary"</span>
                         <span className="text-gray-400">{">"}</span>Add to Cart{" "}
@@ -1032,7 +1217,8 @@ function Dashboard() {
                         <span className="text-gray-400">{">"}</span>
                         {"\n          "}
                         <span className="text-gray-400">{"<"}</span>
-                        <span className="text-green-400">a</span> <span className="text-cyan-400">href</span>
+                        <span className="text-green-400">a</span>{" "}
+                        <span className="text-cyan-400">href</span>
                         <span className="text-gray-400">=</span>
                         <span className="text-yellow-300">"/contact"</span>
                         <span className="text-gray-400">{">"}</span>Contact Us{" "}
@@ -1054,9 +1240,13 @@ function Dashboard() {
                         {"\n  "}
                         {"}"}
                         {"\n\n"}
-                        <span className="text-gray-500">// When language changes to "es", all text will be</span>
+                        <span className="text-gray-500">
+                          // When language changes to "es", all text will be
+                        </span>
                         {"\n"}
-                        <span className="text-gray-500">// automatically replaced with Spanish translations</span>
+                        <span className="text-gray-500">
+                          // automatically replaced with Spanish translations
+                        </span>
                       </code>
                     </pre>
                     <CopyButton
@@ -1073,7 +1263,7 @@ const translations = {
   },
   "fr": {
     "Welcome to our store": "Bienvenue dans notre magasin",
-    "Browse our products": "Parcourir nos produits",     
+    "Browse our products": "Parcourir nos produits",
     "Add to Cart": "Ajouter au Panier",
     "Contact Us": "Nous Contacter"
   }
@@ -1108,7 +1298,9 @@ function ProductPage() {
                   </div>
                 </section>
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Benefits</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Benefits
+                  </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     {[
                       {
@@ -1135,7 +1327,9 @@ function ProductPage() {
                         <h4 className="font-semibold mb-2 text-gray-900 group-hover:text-emerald-700 transition-colors">
                           {benefit.title}
                         </h4>
-                        <p className="text-gray-600 leading-relaxed text-sm lg:text-base">{benefit.desc}</p>
+                        <p className="text-gray-600 leading-relaxed text-sm lg:text-base">
+                          {benefit.desc}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -1149,24 +1343,33 @@ function ProductPage() {
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
                     NoPolygot
-                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-green-400 dark:to-teal-400">
                       Component
                     </span>
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    Component that prevents translation of its children, preserving original content.
+                    Component that prevents translation of its children,
+                    preserving original content.
                   </p>
                 </div>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Props</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Props
+                  </h2>
                   <div className="border border-gray-200 rounded-xl overflow-hidden shadow-lg overflow-x-auto">
                     <table className="w-full min-w-[400px]">
                       <thead className="bg-emerald-50/50">
                         <tr>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Name</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Type</th>
-                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">Description</th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Name
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Type
+                          </th>
+                          <th className="text-left py-3 px-4 font-semibold text-emerald-800">
+                            Description
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1176,7 +1379,9 @@ function ProductPage() {
                               children
                             </code>
                           </td>
-                          <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">ReactNode</td>
+                          <td className="py-3 px-4 text-xs sm:text-sm text-gray-600">
+                            ReactNode
+                          </td>
                           <td className="py-3 px-4 text-xs sm:text-sm text-gray-700">
                             Content to exclude from automatic translation
                           </td>
@@ -1187,13 +1392,27 @@ function ProductPage() {
                 </section>
 
                 <section className="space-y-6">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Use Cases</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    Use Cases
+                  </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     {[
-                      { title: "Contact Information", desc: "Email addresses, phone numbers, physical addresses" },
-                      { title: "Brand Names", desc: "Company names, product names, trademarks" },
-                      { title: "Technical Terms", desc: "API endpoints, code snippets, technical identifiers" },
-                      { title: "Proper Nouns", desc: "Person names, place names, specific references" },
+                      {
+                        title: "Contact Information",
+                        desc: "Email addresses, phone numbers, physical addresses",
+                      },
+                      {
+                        title: "Brand Names",
+                        desc: "Company names, product names, trademarks",
+                      },
+                      {
+                        title: "Technical Terms",
+                        desc: "API endpoints, code snippets, technical identifiers",
+                      },
+                      {
+                        title: "Proper Nouns",
+                        desc: "Person names, place names, specific references",
+                      },
                     ].map((useCase) => (
                       <div
                         key={useCase.title}
@@ -1202,7 +1421,9 @@ function ProductPage() {
                         <h4 className="font-semibold mb-2 text-gray-900 group-hover:text-emerald-700 transition-colors">
                           {useCase.title}
                         </h4>
-                        <p className="text-gray-600 leading-relaxed text-sm lg:text-base">{useCase.desc}</p>
+                        <p className="text-gray-600 leading-relaxed text-sm lg:text-base">
+                          {useCase.desc}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -1213,6 +1434,5 @@ function ProductPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-  

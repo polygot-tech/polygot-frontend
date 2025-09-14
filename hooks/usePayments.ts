@@ -11,7 +11,7 @@ interface Customer {
   zipcode: string;
 }
 
-export const useCreatePayment = (token: string) => {
+export const useCreatePayment = () => {
   return useMutation({
     mutationFn: async ({
       customer,
@@ -20,15 +20,10 @@ export const useCreatePayment = (token: string) => {
       customer: Customer;
       type: string;
     }) => {
-      const res = await apiClient.post(
-        "/api/v1/payments",
-        { customer: customer, type: type },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const res = await apiClient.post("/api/v1/payments", {
+        customer: customer,
+        type: type,
+      });
       return res.data; // should include { paymentLink: string }
     },
   });
