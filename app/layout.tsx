@@ -5,6 +5,7 @@ import { QueryProvider } from "@/providers/QueryProvider";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from "sonner";
+import { ResizableHeader } from "@/components/layout/resizable-header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,13 +74,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-slate-50 via-white to-green-50/30 dark:from-gray-900 dark:via-gray-950 dark:to-green-900/30 min-h-screen`}
       >
         <Analytics/>
         <SpeedInsights/>
         <Toaster/>
         <QueryProvider>
-        {children}
+          <ResizableHeader />
+          {children}
         </QueryProvider>
       </body>
     </html>
