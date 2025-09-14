@@ -8,6 +8,17 @@ interface User {
   name: string
   email: string
   profile_image: string
+  subscription:Subscription
+}
+
+export interface Subscription {
+  id: string
+  plan_id: string
+  status: string
+  current_period_end: string
+  translation_usage: string
+  remaining_usage: string
+  created_at: string
 }
 
 interface AuthState {
